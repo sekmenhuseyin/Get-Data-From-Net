@@ -35,11 +35,11 @@ Partial Class frmMain
         '
         'WebBrowser1
         '
-        Me.WebBrowser1.Location = New System.Drawing.Point(12, 36)
+        Me.WebBrowser1.Location = New System.Drawing.Point(12, 25)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
         Me.WebBrowser1.ScriptErrorsSuppressed = True
-        Me.WebBrowser1.Size = New System.Drawing.Size(866, 185)
+        Me.WebBrowser1.Size = New System.Drawing.Size(866, 628)
         Me.WebBrowser1.TabIndex = 0
         '
         'WebBrowser2
@@ -61,7 +61,7 @@ Partial Class frmMain
         'lblUrl1
         '
         Me.lblUrl1.AutoSize = True
-        Me.lblUrl1.Location = New System.Drawing.Point(12, 20)
+        Me.lblUrl1.Location = New System.Drawing.Point(12, 9)
         Me.lblUrl1.Name = "lblUrl1"
         Me.lblUrl1.Size = New System.Drawing.Size(389, 13)
         Me.lblUrl1.TabIndex = 3
@@ -116,6 +116,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1211, 665)
+        Me.Controls.Add(Me.WebBrowser1)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnNext)
         Me.Controls.Add(Me.txtLists)
@@ -124,7 +125,6 @@ Partial Class frmMain
         Me.Controls.Add(Me.lblUrl1)
         Me.Controls.Add(Me.WebBrowser3)
         Me.Controls.Add(Me.WebBrowser2)
-        Me.Controls.Add(Me.WebBrowser1)
         Me.Name = "frmMain"
         Me.ShowIcon = False
         Me.Text = "MEB Codes"
