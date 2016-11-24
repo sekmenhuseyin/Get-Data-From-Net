@@ -30,6 +30,7 @@ Partial Class frmMain
         Me.lblUrl3 = New System.Windows.Forms.Label()
         Me.txtLists = New System.Windows.Forms.TextBox()
         Me.btnNext = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'WebBrowser1
@@ -101,11 +102,21 @@ Partial Class frmMain
         Me.btnNext.Text = "Next"
         Me.btnNext.UseVisualStyleBackColor = True
         '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(965, 36)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.TabIndex = 8
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1211, 665)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnNext)
         Me.Controls.Add(Me.txtLists)
         Me.Controls.Add(Me.lblUrl3)
@@ -130,4 +141,5 @@ Partial Class frmMain
     Friend WithEvents lblUrl3 As Label
     Friend WithEvents txtLists As TextBox
     Friend WithEvents btnNext As Button
+    Friend WithEvents btnSave As Button
 End Class

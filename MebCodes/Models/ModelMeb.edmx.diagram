@@ -7,9 +7,9 @@
       <Diagram DiagramId="3fd53c7289b74228bcea37e45e441289" Name="Diagram1" ZoomLevel="75">
         <EntityTypeShape EntityType="MEBModel.Il" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MEBModel.Ilce" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MEBModel.Okul" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
         <AssociationConnector Association="MEBModel.FK_Ilce_Il" ManuallyRouted="false" />
-        <AssociationConnector Association="MEBModel.FK_Okul_Ilce" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MEBModel.Okul" Width="1.5" PointX="5.25" PointY="1.25" />
+        <AssociationConnector Association="MEBModel.FK_Okul_Ilce" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

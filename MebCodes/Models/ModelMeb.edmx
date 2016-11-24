@@ -29,7 +29,8 @@
           <Property Name="IlceNo" Type="int" Nullable="false" />
           <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Url" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="KurumKodu" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HakkindaUrl" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="KurumKodu" Type="varchar" MaxLength="50" />
           <Property Name="Tel" Type="varchar" MaxLength="50" />
           <Property Name="Faks" Type="varchar" MaxLength="50" />
           <Property Name="Adres" Type="nvarchar(max)" />
@@ -97,9 +98,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetIlceAd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IlNo" Type="int" Mode="In" />
+          <Parameter Name="IlceNo" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetIlceNo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IlNo" Type="int" Mode="In" />
           <Parameter Name="IlceNo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertSchool" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IlNo" Type="int" Mode="In" />
+          <Parameter Name="IlceNo" Type="int" Mode="In" />
+          <Parameter Name="Ad" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Url" Type="varchar" Mode="In" />
+          <Parameter Name="HakkindaUrl" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="MEBModelStoreContainer">
           <EntitySet Name="Il" EntityType="Self.Il" Schema="dbo" store:Type="Tables" />
@@ -135,17 +147,58 @@
           <Property Name="Kod" Type="Int32" Nullable="false" />
           <Property Name="Ad" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Il" Relationship="Self.FK_Ilce_Il" FromRole="Ilce" ToRole="Il" />
-          <NavigationProperty Name="Okuls" Relationship="Self.FK_Okul_Ilce" FromRole="Ilce" ToRole="Okul" />
+          <NavigationProperty Name="Okuls" Relationship="MEBModel.FK_Okul_Ilce" FromRole="Ilce" ToRole="Okul" />
         </EntityType>
+        <Association Name="FK_Ilce_Il">
+          <End Role="Il" Type="Self.Il" Multiplicity="1" />
+          <End Role="Ilce" Type="Self.Ilce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Il">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="Ilce">
+              <PropertyRef Name="IlNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MEBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ils" EntityType="Self.Il" />
+          <EntitySet Name="Ilces" EntityType="Self.Ilce" />
+          <AssociationSet Name="FK_Ilce_Il" Association="Self.FK_Ilce_Il">
+            <End Role="Il" EntitySet="Ils" />
+            <End Role="Ilce" EntitySet="Ilces" />
+          </AssociationSet>
+          <FunctionImport Name="GetIlceNo" ReturnType="Collection(Int32)">
+            <Parameter Name="IlNo" Mode="In" Type="Int32" />
+            <Parameter Name="IlceNo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Okuls" EntityType="MEBModel.Okul" />
+          <AssociationSet Name="FK_Okul_Ilce" Association="MEBModel.FK_Okul_Ilce">
+            <End Role="Ilce" EntitySet="Ilces" />
+            <End Role="Okul" EntitySet="Okuls" />
+          </AssociationSet>
+          <FunctionImport Name="GetIlceAd" ReturnType="Collection(String)">
+            <Parameter Name="IlNo" Mode="In" Type="Int32" />
+            <Parameter Name="IlceNo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertSchool" ReturnType="Collection(Decimal)">
+            <Parameter Name="IlNo" Mode="In" Type="Int32" />
+            <Parameter Name="IlceNo" Mode="In" Type="Int32" />
+            <Parameter Name="Ad" Mode="In" Type="String" />
+            <Parameter Name="Url" Mode="In" Type="String" />
+            <Parameter Name="HakkindaUrl" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
         <EntityType Name="Okul">
           <Key>
             <PropertyRef Name="No" />
           </Key>
           <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IlceNo" Type="Int32" Nullable="false" />
-          <Property Name="Ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="KurumKodu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ad" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="HakkindaUrl" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="KurumKodu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Faks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -188,23 +241,11 @@
           <Property Name="BilimEtkinlik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Projeler" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="YurtdisiProje" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Ilce" Relationship="Self.FK_Okul_Ilce" FromRole="Okul" ToRole="Ilce" />
+          <NavigationProperty Name="Ilce" Relationship="MEBModel.FK_Okul_Ilce" FromRole="Okul" ToRole="Ilce" />
         </EntityType>
-        <Association Name="FK_Ilce_Il">
-          <End Role="Il" Type="Self.Il" Multiplicity="1" />
-          <End Role="Ilce" Type="Self.Ilce" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Il">
-              <PropertyRef Name="No" />
-            </Principal>
-            <Dependent Role="Ilce">
-              <PropertyRef Name="IlNo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Okul_Ilce">
-          <End Role="Ilce" Type="Self.Ilce" Multiplicity="1" />
-          <End Role="Okul" Type="Self.Okul" Multiplicity="*" />
+          <End Type="MEBModel.Ilce" Role="Ilce" Multiplicity="1" />
+          <End Type="MEBModel.Okul" Role="Okul" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ilce">
               <PropertyRef Name="No" />
@@ -214,23 +255,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MEBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Ils" EntityType="Self.Il" />
-          <EntitySet Name="Ilces" EntityType="Self.Ilce" />
-          <EntitySet Name="Okuls" EntityType="Self.Okul" />
-          <AssociationSet Name="FK_Ilce_Il" Association="Self.FK_Ilce_Il">
-            <End Role="Il" EntitySet="Ils" />
-            <End Role="Ilce" EntitySet="Ilces" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Okul_Ilce" Association="Self.FK_Okul_Ilce">
-            <End Role="Ilce" EntitySet="Ilces" />
-            <End Role="Okul" EntitySet="Okuls" />
-          </AssociationSet>
-          <FunctionImport Name="GetIlceNo" ReturnType="Collection(Int32)">
-            <Parameter Name="IlNo" Mode="In" Type="Int32" />
-            <Parameter Name="IlceNo" Mode="In" Type="Int32" />
-          </FunctionImport>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -255,60 +279,63 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetIlceNo" FunctionName="MEBModel.Store.GetIlceNo" />
           <EntitySetMapping Name="Okuls">
             <EntityTypeMapping TypeName="MEBModel.Okul">
               <MappingFragment StoreEntitySet="Okul">
-                <ScalarProperty Name="No" ColumnName="No" />
-                <ScalarProperty Name="IlceNo" ColumnName="IlceNo" />
-                <ScalarProperty Name="Ad" ColumnName="Ad" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="KurumKodu" ColumnName="KurumKodu" />
-                <ScalarProperty Name="Tel" ColumnName="Tel" />
-                <ScalarProperty Name="Faks" ColumnName="Faks" />
-                <ScalarProperty Name="Adres" ColumnName="Adres" />
-                <ScalarProperty Name="Vizyon" ColumnName="Vizyon" />
-                <ScalarProperty Name="Misyon" ColumnName="Misyon" />
-                <ScalarProperty Name="Basarilar" ColumnName="Basarilar" />
-                <ScalarProperty Name="OgretmenSayi" ColumnName="OgretmenSayi" />
-                <ScalarProperty Name="RehberSayi" ColumnName="RehberSayi" />
-                <ScalarProperty Name="OgrenciSayi" ColumnName="OgrenciSayi" />
-                <ScalarProperty Name="OgretimSekli" ColumnName="OgretimSekli" />
-                <ScalarProperty Name="DersSaati" ColumnName="DersSaati" />
-                <ScalarProperty Name="DesrlikSayi" ColumnName="DesrlikSayi" />
-                <ScalarProperty Name="AtolyeSayi" ColumnName="AtolyeSayi" />
-                <ScalarProperty Name="LabSayi" ColumnName="LabSayi" />
-                <ScalarProperty Name="BtSayi" ColumnName="BtSayi" />
-                <ScalarProperty Name="ResimSayi" ColumnName="ResimSayi" />
-                <ScalarProperty Name="MuzikSayi" ColumnName="MuzikSayi" />
-                <ScalarProperty Name="YabanciDil" ColumnName="YabanciDil" />
-                <ScalarProperty Name="Internet" ColumnName="Internet" />
-                <ScalarProperty Name="Hazirlik" ColumnName="Hazirlik" />
-                <ScalarProperty Name="Konferans" ColumnName="Konferans" />
-                <ScalarProperty Name="Spor" ColumnName="Spor" />
-                <ScalarProperty Name="Yemekhane" ColumnName="Yemekhane" />
-                <ScalarProperty Name="Misafirhane" ColumnName="Misafirhane" />
-                <ScalarProperty Name="Kutuphane" ColumnName="Kutuphane" />
-                <ScalarProperty Name="Kantin" ColumnName="Kantin" />
-                <ScalarProperty Name="Revir" ColumnName="Revir" />
-                <ScalarProperty Name="Bahce" ColumnName="Bahce" />
-                <ScalarProperty Name="LojmanSayi" ColumnName="LojmanSayi" />
-                <ScalarProperty Name="İsinma" ColumnName="İsinma" />
-                <ScalarProperty Name="Uzaklik" ColumnName="Uzaklik" />
-                <ScalarProperty Name="Ulasim" ColumnName="Ulasim" />
-                <ScalarProperty Name="Servis" ColumnName="Servis" />
-                <ScalarProperty Name="Yerlesim" ColumnName="Yerlesim" />
-                <ScalarProperty Name="Kontenjan" ColumnName="Kontenjan" />
-                <ScalarProperty Name="PuanBilgi" ColumnName="PuanBilgi" />
-                <ScalarProperty Name="BasariDurumu" ColumnName="BasariDurumu" />
-                <ScalarProperty Name="YerlestirmeYuzde" ColumnName="YerlestirmeYuzde" />
-                <ScalarProperty Name="SporEtkinlik" ColumnName="SporEtkinlik" />
-                <ScalarProperty Name="BilimEtkinlik" ColumnName="BilimEtkinlik" />
-                <ScalarProperty Name="Projeler" ColumnName="Projeler" />
                 <ScalarProperty Name="YurtdisiProje" ColumnName="YurtdisiProje" />
+                <ScalarProperty Name="Projeler" ColumnName="Projeler" />
+                <ScalarProperty Name="BilimEtkinlik" ColumnName="BilimEtkinlik" />
+                <ScalarProperty Name="SporEtkinlik" ColumnName="SporEtkinlik" />
+                <ScalarProperty Name="YerlestirmeYuzde" ColumnName="YerlestirmeYuzde" />
+                <ScalarProperty Name="BasariDurumu" ColumnName="BasariDurumu" />
+                <ScalarProperty Name="PuanBilgi" ColumnName="PuanBilgi" />
+                <ScalarProperty Name="Kontenjan" ColumnName="Kontenjan" />
+                <ScalarProperty Name="Yerlesim" ColumnName="Yerlesim" />
+                <ScalarProperty Name="Servis" ColumnName="Servis" />
+                <ScalarProperty Name="Ulasim" ColumnName="Ulasim" />
+                <ScalarProperty Name="Uzaklik" ColumnName="Uzaklik" />
+                <ScalarProperty Name="İsinma" ColumnName="İsinma" />
+                <ScalarProperty Name="LojmanSayi" ColumnName="LojmanSayi" />
+                <ScalarProperty Name="Bahce" ColumnName="Bahce" />
+                <ScalarProperty Name="Revir" ColumnName="Revir" />
+                <ScalarProperty Name="Kantin" ColumnName="Kantin" />
+                <ScalarProperty Name="Kutuphane" ColumnName="Kutuphane" />
+                <ScalarProperty Name="Misafirhane" ColumnName="Misafirhane" />
+                <ScalarProperty Name="Yemekhane" ColumnName="Yemekhane" />
+                <ScalarProperty Name="Spor" ColumnName="Spor" />
+                <ScalarProperty Name="Konferans" ColumnName="Konferans" />
+                <ScalarProperty Name="Hazirlik" ColumnName="Hazirlik" />
+                <ScalarProperty Name="Internet" ColumnName="Internet" />
+                <ScalarProperty Name="YabanciDil" ColumnName="YabanciDil" />
+                <ScalarProperty Name="MuzikSayi" ColumnName="MuzikSayi" />
+                <ScalarProperty Name="ResimSayi" ColumnName="ResimSayi" />
+                <ScalarProperty Name="BtSayi" ColumnName="BtSayi" />
+                <ScalarProperty Name="LabSayi" ColumnName="LabSayi" />
+                <ScalarProperty Name="AtolyeSayi" ColumnName="AtolyeSayi" />
+                <ScalarProperty Name="DesrlikSayi" ColumnName="DesrlikSayi" />
+                <ScalarProperty Name="DersSaati" ColumnName="DersSaati" />
+                <ScalarProperty Name="OgretimSekli" ColumnName="OgretimSekli" />
+                <ScalarProperty Name="OgrenciSayi" ColumnName="OgrenciSayi" />
+                <ScalarProperty Name="RehberSayi" ColumnName="RehberSayi" />
+                <ScalarProperty Name="OgretmenSayi" ColumnName="OgretmenSayi" />
+                <ScalarProperty Name="Basarilar" ColumnName="Basarilar" />
+                <ScalarProperty Name="Misyon" ColumnName="Misyon" />
+                <ScalarProperty Name="Vizyon" ColumnName="Vizyon" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Faks" ColumnName="Faks" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="KurumKodu" ColumnName="KurumKodu" />
+                <ScalarProperty Name="HakkindaUrl" ColumnName="HakkindaUrl" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="IlceNo" ColumnName="IlceNo" />
+                <ScalarProperty Name="No" ColumnName="No" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetIlceNo" FunctionName="MEBModel.Store.GetIlceNo" />
+          <FunctionImportMapping FunctionImportName="GetIlceAd" FunctionName="MEBModel.Store.GetIlceAd" />
+          <FunctionImportMapping FunctionImportName="InsertSchool" FunctionName="MEBModel.Store.InsertSchool" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

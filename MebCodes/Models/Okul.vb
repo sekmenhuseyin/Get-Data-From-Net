@@ -15,6 +15,7 @@ Partial Public Class Okul
     Public Property IlceNo As Integer
     Public Property Ad As String
     Public Property Url As String
+    Public Property HakkindaUrl As String
     Public Property KurumKodu As String
     Public Property Tel As String
     Public Property Faks As String
