@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MEBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Il">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="int" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ilce">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IlNo" Type="int" Nullable="false" />
+          <Property Name="Kod" Type="int" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Okul">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IlceNo" Type="int" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Url" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="KurumKodu" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Tel" Type="varchar" MaxLength="50" />
+          <Property Name="Faks" Type="varchar" MaxLength="50" />
+          <Property Name="Adres" Type="nvarchar(max)" />
+          <Property Name="Vizyon" Type="nvarchar(max)" />
+          <Property Name="Misyon" Type="nvarchar(max)" />
+          <Property Name="Basarilar" Type="nvarchar(max)" />
+          <Property Name="OgretmenSayi" Type="int" Nullable="false" />
+          <Property Name="RehberSayi" Type="int" Nullable="false" />
+          <Property Name="OgrenciSayi" Type="int" Nullable="false" />
+          <Property Name="OgretimSekli" Type="nvarchar" MaxLength="50" />
+          <Property Name="DersSaati" Type="int" Nullable="false" />
+          <Property Name="DesrlikSayi" Type="int" Nullable="false" />
+          <Property Name="AtolyeSayi" Type="int" Nullable="false" />
+          <Property Name="LabSayi" Type="int" Nullable="false" />
+          <Property Name="BtSayi" Type="int" Nullable="false" />
+          <Property Name="ResimSayi" Type="int" Nullable="false" />
+          <Property Name="MuzikSayi" Type="int" Nullable="false" />
+          <Property Name="YabanciDil" Type="int" Nullable="false" />
+          <Property Name="Internet" Type="nvarchar" MaxLength="50" />
+          <Property Name="Hazirlik" Type="bit" Nullable="false" />
+          <Property Name="Konferans" Type="bit" Nullable="false" />
+          <Property Name="Spor" Type="bit" Nullable="false" />
+          <Property Name="Yemekhane" Type="bit" Nullable="false" />
+          <Property Name="Misafirhane" Type="bit" Nullable="false" />
+          <Property Name="Kutuphane" Type="bit" Nullable="false" />
+          <Property Name="Kantin" Type="bit" Nullable="false" />
+          <Property Name="Revir" Type="bit" Nullable="false" />
+          <Property Name="Bahce" Type="bit" Nullable="false" />
+          <Property Name="LojmanSayi" Type="int" Nullable="false" />
+          <Property Name="İsinma" Type="nvarchar" MaxLength="50" />
+          <Property Name="Uzaklik" Type="nvarchar(max)" />
+          <Property Name="Ulasim" Type="nvarchar(max)" />
+          <Property Name="Servis" Type="nvarchar(max)" />
+          <Property Name="Yerlesim" Type="nvarchar(max)" />
+          <Property Name="Kontenjan" Type="nvarchar(max)" />
+          <Property Name="PuanBilgi" Type="nvarchar(max)" />
+          <Property Name="BasariDurumu" Type="nvarchar(max)" />
+          <Property Name="YerlestirmeYuzde" Type="nvarchar" MaxLength="50" />
+          <Property Name="SporEtkinlik" Type="nvarchar(max)" />
+          <Property Name="BilimEtkinlik" Type="nvarchar(max)" />
+          <Property Name="Projeler" Type="nvarchar(max)" />
+          <Property Name="YurtdisiProje" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Ilce_Il">
+          <End Role="Il" Type="Self.Il" Multiplicity="1" />
+          <End Role="Ilce" Type="Self.Ilce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Il">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="Ilce">
+              <PropertyRef Name="IlNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Okul_Ilce">
+          <End Role="Ilce" Type="Self.Ilce" Multiplicity="1" />
+          <End Role="Okul" Type="Self.Okul" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ilce">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="Okul">
+              <PropertyRef Name="IlceNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetIlceNo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IlNo" Type="int" Mode="In" />
+          <Parameter Name="IlceNo" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="MEBModelStoreContainer">
+          <EntitySet Name="Il" EntityType="Self.Il" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ilce" EntityType="Self.Ilce" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Okul" EntityType="Self.Okul" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Ilce_Il" Association="Self.FK_Ilce_Il">
+            <End Role="Il" EntitySet="Il" />
+            <End Role="Ilce" EntitySet="Ilce" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Okul_Ilce" Association="Self.FK_Okul_Ilce">
+            <End Role="Ilce" EntitySet="Ilce" />
+            <End Role="Okul" EntitySet="Okul" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MEBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Il">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Ilces" Relationship="Self.FK_Ilce_Il" FromRole="Il" ToRole="Ilce" />
+        </EntityType>
+        <EntityType Name="Ilce">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IlNo" Type="Int32" Nullable="false" />
+          <Property Name="Kod" Type="Int32" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Il" Relationship="Self.FK_Ilce_Il" FromRole="Ilce" ToRole="Il" />
+          <NavigationProperty Name="Okuls" Relationship="Self.FK_Okul_Ilce" FromRole="Ilce" ToRole="Okul" />
+        </EntityType>
+        <EntityType Name="Okul">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IlceNo" Type="Int32" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="KurumKodu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Faks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Vizyon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Misyon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Basarilar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OgretmenSayi" Type="Int32" Nullable="false" />
+          <Property Name="RehberSayi" Type="Int32" Nullable="false" />
+          <Property Name="OgrenciSayi" Type="Int32" Nullable="false" />
+          <Property Name="OgretimSekli" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DersSaati" Type="Int32" Nullable="false" />
+          <Property Name="DesrlikSayi" Type="Int32" Nullable="false" />
+          <Property Name="AtolyeSayi" Type="Int32" Nullable="false" />
+          <Property Name="LabSayi" Type="Int32" Nullable="false" />
+          <Property Name="BtSayi" Type="Int32" Nullable="false" />
+          <Property Name="ResimSayi" Type="Int32" Nullable="false" />
+          <Property Name="MuzikSayi" Type="Int32" Nullable="false" />
+          <Property Name="YabanciDil" Type="Int32" Nullable="false" />
+          <Property Name="Internet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Hazirlik" Type="Boolean" Nullable="false" />
+          <Property Name="Konferans" Type="Boolean" Nullable="false" />
+          <Property Name="Spor" Type="Boolean" Nullable="false" />
+          <Property Name="Yemekhane" Type="Boolean" Nullable="false" />
+          <Property Name="Misafirhane" Type="Boolean" Nullable="false" />
+          <Property Name="Kutuphane" Type="Boolean" Nullable="false" />
+          <Property Name="Kantin" Type="Boolean" Nullable="false" />
+          <Property Name="Revir" Type="Boolean" Nullable="false" />
+          <Property Name="Bahce" Type="Boolean" Nullable="false" />
+          <Property Name="LojmanSayi" Type="Int32" Nullable="false" />
+          <Property Name="İsinma" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Uzaklik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ulasim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Servis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Yerlesim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Kontenjan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PuanBilgi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BasariDurumu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YerlestirmeYuzde" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SporEtkinlik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BilimEtkinlik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Projeler" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YurtdisiProje" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ilce" Relationship="Self.FK_Okul_Ilce" FromRole="Okul" ToRole="Ilce" />
+        </EntityType>
+        <Association Name="FK_Ilce_Il">
+          <End Role="Il" Type="Self.Il" Multiplicity="1" />
+          <End Role="Ilce" Type="Self.Ilce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Il">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="Ilce">
+              <PropertyRef Name="IlNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Okul_Ilce">
+          <End Role="Ilce" Type="Self.Ilce" Multiplicity="1" />
+          <End Role="Okul" Type="Self.Okul" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ilce">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="Okul">
+              <PropertyRef Name="IlceNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MEBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ils" EntityType="Self.Il" />
+          <EntitySet Name="Ilces" EntityType="Self.Ilce" />
+          <EntitySet Name="Okuls" EntityType="Self.Okul" />
+          <AssociationSet Name="FK_Ilce_Il" Association="Self.FK_Ilce_Il">
+            <End Role="Il" EntitySet="Ils" />
+            <End Role="Ilce" EntitySet="Ilces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Okul_Ilce" Association="Self.FK_Okul_Ilce">
+            <End Role="Ilce" EntitySet="Ilces" />
+            <End Role="Okul" EntitySet="Okuls" />
+          </AssociationSet>
+          <FunctionImport Name="GetIlceNo" ReturnType="Collection(Int32)">
+            <Parameter Name="IlNo" Mode="In" Type="Int32" />
+            <Parameter Name="IlceNo" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MEBModelStoreContainer" CdmEntityContainer="MEBEntities">
+          <EntitySetMapping Name="Ils">
+            <EntityTypeMapping TypeName="MEBModel.Il">
+              <MappingFragment StoreEntitySet="Il">
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ilces">
+            <EntityTypeMapping TypeName="MEBModel.Ilce">
+              <MappingFragment StoreEntitySet="Ilce">
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="IlNo" ColumnName="IlNo" />
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Okuls">
+            <EntityTypeMapping TypeName="MEBModel.Okul">
+              <MappingFragment StoreEntitySet="Okul">
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="IlceNo" ColumnName="IlceNo" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="KurumKodu" ColumnName="KurumKodu" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Faks" ColumnName="Faks" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Vizyon" ColumnName="Vizyon" />
+                <ScalarProperty Name="Misyon" ColumnName="Misyon" />
+                <ScalarProperty Name="Basarilar" ColumnName="Basarilar" />
+                <ScalarProperty Name="OgretmenSayi" ColumnName="OgretmenSayi" />
+                <ScalarProperty Name="RehberSayi" ColumnName="RehberSayi" />
+                <ScalarProperty Name="OgrenciSayi" ColumnName="OgrenciSayi" />
+                <ScalarProperty Name="OgretimSekli" ColumnName="OgretimSekli" />
+                <ScalarProperty Name="DersSaati" ColumnName="DersSaati" />
+                <ScalarProperty Name="DesrlikSayi" ColumnName="DesrlikSayi" />
+                <ScalarProperty Name="AtolyeSayi" ColumnName="AtolyeSayi" />
+                <ScalarProperty Name="LabSayi" ColumnName="LabSayi" />
+                <ScalarProperty Name="BtSayi" ColumnName="BtSayi" />
+                <ScalarProperty Name="ResimSayi" ColumnName="ResimSayi" />
+                <ScalarProperty Name="MuzikSayi" ColumnName="MuzikSayi" />
+                <ScalarProperty Name="YabanciDil" ColumnName="YabanciDil" />
+                <ScalarProperty Name="Internet" ColumnName="Internet" />
+                <ScalarProperty Name="Hazirlik" ColumnName="Hazirlik" />
+                <ScalarProperty Name="Konferans" ColumnName="Konferans" />
+                <ScalarProperty Name="Spor" ColumnName="Spor" />
+                <ScalarProperty Name="Yemekhane" ColumnName="Yemekhane" />
+                <ScalarProperty Name="Misafirhane" ColumnName="Misafirhane" />
+                <ScalarProperty Name="Kutuphane" ColumnName="Kutuphane" />
+                <ScalarProperty Name="Kantin" ColumnName="Kantin" />
+                <ScalarProperty Name="Revir" ColumnName="Revir" />
+                <ScalarProperty Name="Bahce" ColumnName="Bahce" />
+                <ScalarProperty Name="LojmanSayi" ColumnName="LojmanSayi" />
+                <ScalarProperty Name="İsinma" ColumnName="İsinma" />
+                <ScalarProperty Name="Uzaklik" ColumnName="Uzaklik" />
+                <ScalarProperty Name="Ulasim" ColumnName="Ulasim" />
+                <ScalarProperty Name="Servis" ColumnName="Servis" />
+                <ScalarProperty Name="Yerlesim" ColumnName="Yerlesim" />
+                <ScalarProperty Name="Kontenjan" ColumnName="Kontenjan" />
+                <ScalarProperty Name="PuanBilgi" ColumnName="PuanBilgi" />
+                <ScalarProperty Name="BasariDurumu" ColumnName="BasariDurumu" />
+                <ScalarProperty Name="YerlestirmeYuzde" ColumnName="YerlestirmeYuzde" />
+                <ScalarProperty Name="SporEtkinlik" ColumnName="SporEtkinlik" />
+                <ScalarProperty Name="BilimEtkinlik" ColumnName="BilimEtkinlik" />
+                <ScalarProperty Name="Projeler" ColumnName="Projeler" />
+                <ScalarProperty Name="YurtdisiProje" ColumnName="YurtdisiProje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetIlceNo" FunctionName="MEBModel.Store.GetIlceNo" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

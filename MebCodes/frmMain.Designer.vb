@@ -28,6 +28,8 @@ Partial Class frmMain
         Me.lblUrl1 = New System.Windows.Forms.Label()
         Me.lblUrl2 = New System.Windows.Forms.Label()
         Me.lblUrl3 = New System.Windows.Forms.Label()
+        Me.txtLists = New System.Windows.Forms.TextBox()
+        Me.btnNext = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'WebBrowser1
@@ -35,6 +37,7 @@ Partial Class frmMain
         Me.WebBrowser1.Location = New System.Drawing.Point(12, 36)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
+        Me.WebBrowser1.ScriptErrorsSuppressed = True
         Me.WebBrowser1.Size = New System.Drawing.Size(866, 185)
         Me.WebBrowser1.TabIndex = 0
         '
@@ -81,11 +84,30 @@ Partial Class frmMain
         Me.lblUrl3.TabIndex = 5
         Me.lblUrl3.Text = "http://www.meb.gov.tr/baglantilar/okullar/"
         '
+        'txtLists
+        '
+        Me.txtLists.Location = New System.Drawing.Point(884, 74)
+        Me.txtLists.Multiline = True
+        Me.txtLists.Name = "txtLists"
+        Me.txtLists.Size = New System.Drawing.Size(280, 579)
+        Me.txtLists.TabIndex = 6
+        '
+        'btnNext
+        '
+        Me.btnNext.Location = New System.Drawing.Point(884, 36)
+        Me.btnNext.Name = "btnNext"
+        Me.btnNext.Size = New System.Drawing.Size(75, 23)
+        Me.btnNext.TabIndex = 7
+        Me.btnNext.Text = "Next"
+        Me.btnNext.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(890, 665)
+        Me.ClientSize = New System.Drawing.Size(1211, 665)
+        Me.Controls.Add(Me.btnNext)
+        Me.Controls.Add(Me.txtLists)
         Me.Controls.Add(Me.lblUrl3)
         Me.Controls.Add(Me.lblUrl2)
         Me.Controls.Add(Me.lblUrl1)
@@ -106,4 +128,6 @@ Partial Class frmMain
     Friend WithEvents lblUrl1 As Label
     Friend WithEvents lblUrl2 As Label
     Friend WithEvents lblUrl3 As Label
+    Friend WithEvents txtLists As TextBox
+    Friend WithEvents btnNext As Button
 End Class
