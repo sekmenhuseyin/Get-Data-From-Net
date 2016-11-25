@@ -31,6 +31,7 @@ Partial Class frmMain
         Me.txtLists = New System.Windows.Forms.TextBox()
         Me.btnNext = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnStart = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'WebBrowser1
@@ -95,12 +96,13 @@ Partial Class frmMain
         '
         'btnNext
         '
-        Me.btnNext.Location = New System.Drawing.Point(884, 36)
+        Me.btnNext.Location = New System.Drawing.Point(1089, 36)
         Me.btnNext.Name = "btnNext"
         Me.btnNext.Size = New System.Drawing.Size(75, 23)
         Me.btnNext.TabIndex = 7
         Me.btnNext.Text = "Next"
         Me.btnNext.UseVisualStyleBackColor = True
+        Me.btnNext.Visible = False
         '
         'btnSave
         '
@@ -111,11 +113,21 @@ Partial Class frmMain
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'btnStart
+        '
+        Me.btnStart.Location = New System.Drawing.Point(884, 36)
+        Me.btnStart.Name = "btnStart"
+        Me.btnStart.Size = New System.Drawing.Size(75, 23)
+        Me.btnStart.TabIndex = 9
+        Me.btnStart.Text = "Start"
+        Me.btnStart.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1211, 665)
+        Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.WebBrowser1)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnNext)
@@ -142,4 +154,5 @@ Partial Class frmMain
     Friend WithEvents txtLists As TextBox
     Friend WithEvents btnNext As Button
     Friend WithEvents btnSave As Button
+    Friend WithEvents btnStart As Button
 End Class

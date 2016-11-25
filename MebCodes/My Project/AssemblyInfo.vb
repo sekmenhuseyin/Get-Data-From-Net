@@ -1,4 +1,5 @@
-﻿Imports System
+﻿Imports System.Resources
+Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -8,10 +9,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("MebCodes")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("MebCodes")>
+<Assembly: AssemblyTitle("MEB Codes")>
+<Assembly: AssemblyDescription("MEB Codes")>
+<Assembly: AssemblyCompany("KarineSoft")>
+<Assembly: AssemblyProduct("MEB Codes")>
 <Assembly: AssemblyCopyright("Copyright ©  2016")>
 <Assembly: AssemblyTrademark("")>
 
@@ -33,3 +34,4 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyVersion("1.0.0.0")>
 <Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: NeutralResourcesLanguage("tr-TR")>
