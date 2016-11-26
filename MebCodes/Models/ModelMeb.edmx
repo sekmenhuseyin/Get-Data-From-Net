@@ -112,6 +112,11 @@
           <Parameter Name="Ad" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Url" Type="varchar" Mode="In" />
           <Parameter Name="HakkindaUrl" Type="varchar" Mode="In" />
+          <Parameter Name="KurumKodu" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateSchool" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OkulNo" Type="int" Mode="In" />
+          <Parameter Name="KurumKodu" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="MEBModelStoreContainer">
           <EntitySet Name="Il" EntityType="Self.Il" Schema="dbo" store:Type="Tables" />
@@ -187,6 +192,11 @@
             <Parameter Name="Ad" Mode="In" Type="String" />
             <Parameter Name="Url" Mode="In" Type="String" />
             <Parameter Name="HakkindaUrl" Mode="In" Type="String" />
+            <Parameter Name="KurumKodu" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateSchool">
+            <Parameter Name="OkulNo" Mode="In" Type="Int32" />
+            <Parameter Name="KurumKodu" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Okul">
@@ -336,6 +346,7 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetIlceAd" FunctionName="MEBModel.Store.GetIlceAd" />
           <FunctionImportMapping FunctionImportName="InsertSchool" FunctionName="MEBModel.Store.InsertSchool" />
+          <FunctionImportMapping FunctionImportName="UpdateSchool" FunctionName="MEBModel.Store.UpdateSchool" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
