@@ -30,7 +30,7 @@
           <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Url" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="HakkindaUrl" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="KurumKodu" Type="varchar" MaxLength="50" />
+          <Property Name="KurumKodu" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Tel" Type="varchar" MaxLength="50" />
           <Property Name="Faks" Type="varchar" MaxLength="50" />
           <Property Name="Adres" Type="nvarchar(max)" />
@@ -42,13 +42,13 @@
           <Property Name="OgrenciSayi" Type="int" Nullable="false" />
           <Property Name="OgretimSekli" Type="nvarchar" MaxLength="50" />
           <Property Name="DersSaati" Type="int" Nullable="false" />
-          <Property Name="DesrlikSayi" Type="int" Nullable="false" />
+          <Property Name="DerslikSayi" Type="int" Nullable="false" />
           <Property Name="AtolyeSayi" Type="int" Nullable="false" />
           <Property Name="LabSayi" Type="int" Nullable="false" />
           <Property Name="BtSayi" Type="int" Nullable="false" />
           <Property Name="ResimSayi" Type="int" Nullable="false" />
           <Property Name="MuzikSayi" Type="int" Nullable="false" />
-          <Property Name="YabanciDil" Type="int" Nullable="false" />
+          <Property Name="YabanciDil" Type="nvarchar" MaxLength="50" />
           <Property Name="Internet" Type="nvarchar" MaxLength="50" />
           <Property Name="Hazirlik" Type="bit" Nullable="false" />
           <Property Name="Konferans" Type="bit" Nullable="false" />
@@ -60,7 +60,7 @@
           <Property Name="Revir" Type="bit" Nullable="false" />
           <Property Name="Bahce" Type="bit" Nullable="false" />
           <Property Name="LojmanSayi" Type="int" Nullable="false" />
-          <Property Name="İsinma" Type="nvarchar" MaxLength="50" />
+          <Property Name="Isinma" Type="nvarchar" MaxLength="50" />
           <Property Name="Uzaklik" Type="nvarchar(max)" />
           <Property Name="Ulasim" Type="nvarchar(max)" />
           <Property Name="Servis" Type="nvarchar(max)" />
@@ -116,7 +116,8 @@
         </Function>
         <Function Name="UpdateSchool" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="OkulNo" Type="int" Mode="In" />
-          <Parameter Name="KurumKodu" Type="varchar" Mode="In" />
+          <Parameter Name="Madde" Type="varchar" Mode="In" />
+          <Parameter Name="deger" Type="nvarchar(max)" Mode="In" />
         </Function>
         <EntityContainer Name="MEBModelStoreContainer">
           <EntitySet Name="Il" EntityType="Self.Il" Schema="dbo" store:Type="Tables" />
@@ -177,11 +178,6 @@
             <Parameter Name="IlNo" Mode="In" Type="Int32" />
             <Parameter Name="IlceNo" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="Okuls" EntityType="MEBModel.Okul" />
-          <AssociationSet Name="FK_Okul_Ilce" Association="MEBModel.FK_Okul_Ilce">
-            <End Role="Ilce" EntitySet="Ilces" />
-            <End Role="Okul" EntitySet="Okuls" />
-          </AssociationSet>
           <FunctionImport Name="GetIlceAd" ReturnType="Collection(String)">
             <Parameter Name="IlNo" Mode="In" Type="Int32" />
             <Parameter Name="IlceNo" Mode="In" Type="Int32" />
@@ -196,8 +192,14 @@
           </FunctionImport>
           <FunctionImport Name="UpdateSchool">
             <Parameter Name="OkulNo" Mode="In" Type="Int32" />
-            <Parameter Name="KurumKodu" Mode="In" Type="String" />
+            <Parameter Name="Madde" Mode="In" Type="String" />
+            <Parameter Name="deger" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Okuls" EntityType="MEBModel.Okul" />
+          <AssociationSet Name="FK_Okul_Ilce" Association="MEBModel.FK_Okul_Ilce">
+            <End Role="Ilce" EntitySet="Ilces" />
+            <End Role="Okul" EntitySet="Okuls" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Okul">
           <Key>
@@ -208,7 +210,7 @@
           <Property Name="Ad" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Url" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="HakkindaUrl" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="KurumKodu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KurumKodu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Faks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -220,13 +222,13 @@
           <Property Name="OgrenciSayi" Type="Int32" Nullable="false" />
           <Property Name="OgretimSekli" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DersSaati" Type="Int32" Nullable="false" />
-          <Property Name="DesrlikSayi" Type="Int32" Nullable="false" />
+          <Property Name="DerslikSayi" Type="Int32" Nullable="false" />
           <Property Name="AtolyeSayi" Type="Int32" Nullable="false" />
           <Property Name="LabSayi" Type="Int32" Nullable="false" />
           <Property Name="BtSayi" Type="Int32" Nullable="false" />
           <Property Name="ResimSayi" Type="Int32" Nullable="false" />
           <Property Name="MuzikSayi" Type="Int32" Nullable="false" />
-          <Property Name="YabanciDil" Type="Int32" Nullable="false" />
+          <Property Name="YabanciDil" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Internet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Hazirlik" Type="Boolean" Nullable="false" />
           <Property Name="Konferans" Type="Boolean" Nullable="false" />
@@ -238,7 +240,7 @@
           <Property Name="Revir" Type="Boolean" Nullable="false" />
           <Property Name="Bahce" Type="Boolean" Nullable="false" />
           <Property Name="LojmanSayi" Type="Int32" Nullable="false" />
-          <Property Name="İsinma" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Isinma" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Uzaklik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Ulasim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Servis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -290,6 +292,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetIlceNo" FunctionName="MEBModel.Store.GetIlceNo" />
+          <FunctionImportMapping FunctionImportName="GetIlceAd" FunctionName="MEBModel.Store.GetIlceAd" />
+          <FunctionImportMapping FunctionImportName="InsertSchool" FunctionName="MEBModel.Store.InsertSchool" />
+          <FunctionImportMapping FunctionImportName="UpdateSchool" FunctionName="MEBModel.Store.UpdateSchool" />
           <EntitySetMapping Name="Okuls">
             <EntityTypeMapping TypeName="MEBModel.Okul">
               <MappingFragment StoreEntitySet="Okul">
@@ -305,7 +310,7 @@
                 <ScalarProperty Name="Servis" ColumnName="Servis" />
                 <ScalarProperty Name="Ulasim" ColumnName="Ulasim" />
                 <ScalarProperty Name="Uzaklik" ColumnName="Uzaklik" />
-                <ScalarProperty Name="İsinma" ColumnName="İsinma" />
+                <ScalarProperty Name="Isinma" ColumnName="Isinma" />
                 <ScalarProperty Name="LojmanSayi" ColumnName="LojmanSayi" />
                 <ScalarProperty Name="Bahce" ColumnName="Bahce" />
                 <ScalarProperty Name="Revir" ColumnName="Revir" />
@@ -323,7 +328,7 @@
                 <ScalarProperty Name="BtSayi" ColumnName="BtSayi" />
                 <ScalarProperty Name="LabSayi" ColumnName="LabSayi" />
                 <ScalarProperty Name="AtolyeSayi" ColumnName="AtolyeSayi" />
-                <ScalarProperty Name="DesrlikSayi" ColumnName="DesrlikSayi" />
+                <ScalarProperty Name="DerslikSayi" ColumnName="DerslikSayi" />
                 <ScalarProperty Name="DersSaati" ColumnName="DersSaati" />
                 <ScalarProperty Name="OgretimSekli" ColumnName="OgretimSekli" />
                 <ScalarProperty Name="OgrenciSayi" ColumnName="OgrenciSayi" />
@@ -344,9 +349,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetIlceAd" FunctionName="MEBModel.Store.GetIlceAd" />
-          <FunctionImportMapping FunctionImportName="InsertSchool" FunctionName="MEBModel.Store.InsertSchool" />
-          <FunctionImportMapping FunctionImportName="UpdateSchool" FunctionName="MEBModel.Store.UpdateSchool" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

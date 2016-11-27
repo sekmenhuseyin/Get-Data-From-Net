@@ -1,8 +1,11 @@
 ﻿Imports Microsoft.Win32
 
 Public Class frmMain
-    Dim il, ilce, sayfa As Integer, ad As String, sayfaVar, isLoaded As Boolean
+    Dim il, ilce, sayfa, no As Integer, ad As String, sayfaVar, isLoaded As Boolean
     Dim db As MEBEntities = New MEBEntities()
+    Dim alanlar() = {"Tel", "Fax", "WEB", "Adres", "Vizyon", "Misyon", "Basarilar", "OgretmenSayi", "RehberSayi", "OgrenciSayi", "DerslikSayi", "MuzikSayi", "ResimSayi", "BtSayi", "Misafirhane", "Kutuphane", "LabSayi", "Hazirlik", "Konferans", "AtolyeSayi", "Spor", "OgretimSekli", "Yemekhane", "Kantin", "Revir", "Bahce", "DersSaati", "Isinma", "Internet", "Yabancı Dil", "Pansiyon Bilgileri", "LojmanSayi", "LojmanSayi", "Ulasim", "Servis", "Yerlesim", "Kontenjan", "PuanBilgi", "BasariDurumu", "YerlestirmeYuzde", "SporEtkinlik", "BilimEtkinlik", "Projeler", "YurtdisiProje"}
+    Dim alanlar1() = {"Telefon", "Belgegeçer", "WEB", "Adres", "Vizyon", "Misyon", "Başarılar", "Öğretmen", "Rehber Öğretmen", "Öğrenci", "Derslik", "Müzik Sınıfı", "Resim Sınıfı", "BT Sınıfı", "Misafirhane", "Kütüphane", "Fen Labaratuarı", "Hazırlık Sınıfı", "Konferans Salonu", "Atölye-İşlik", "Spor Salonu", "Öğretim Şekli", "Yemekhane", "Kantin", "Revir", "Bahçe", "Saatler", "Isınma", "Bağlantı", "Yabancı Dil", "Pansiyon Bilgileri", "Lojman", "Sayısı", "Ulaşım", "Servis", "Yerleşim Yeri", "Kontenjan Bilgileri", "Taban-Tavan Puan Bilgileri", "Okulun YGS/LYS Başarı Durumu", "LYS'de Öğrenci Yerleştirme Yüzdesi", "Sportif Etkinlikler", "Bilimsel Etkinlikler", "Proje Çalışmaları", "Yurtdışı Proje Faaliyetleri"}
+    Dim alanlar2() = {"Telefon", "Belgegeçer", "WEB", "Adres", "VİZYON", "MİSYON", "BAŞARILAR", "Öğretmen", "Rehber Öğretmen", "Öğrenci", "Derslik", "Müzik Sınıfı", "Resim Sınıfı", "BT Sınıfı", "Misafirhane", "Kütüphane", "Fen Labaratuarı", "Hazırlık Sınıfı", "Konferans Salonu", "Atölye-İşlik", "Spor Salonu", "Öğretim Şekli", "Yemekhane", "Kantin", "Revir", "Bahçe", "Saatler", "Isınma", "Bağlantı", "Yabancı Dil", "Pansiyon Bilgileri", "Lojman", "Sayısı", "Ulaşım", "Servis", "Yerleşim Yeri", "Kontenjan Bilgileri", "Taban-Tavan Puan Bilgileri", "Okulun YGS/LYS Başarı Durumu", "LYS'de Öğrenci Yerleştirme Yüzdesi", "Sportif Etkinlikler", "Bilimsel Etkinlikler", "Proje Çalışmaları", "Yurtdışı Proje Faaliyetleri"}
     'frm load
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'SetBrowserFeatureControl()
@@ -41,7 +44,7 @@ Public Class frmMain
         For Each item In tbl
             isLoaded = False
             'ad = "http://abdulkadirpaksoyanadolulisesi.meb.k12.tr" : ReloadFrame("http://abdulkadirpaksoyanadolulisesi.meb.k12.tr/meb_iys_dosyalar/01/01/111573/okulumuz_hakkinda.html")
-            ad = item.Url : ReloadFrame(item.HakkindaUrl)
+            ad = item.Url : ReloadFrame(item.HakkindaUrl) : no = item.No
             Do While isLoaded = False
                 Threading.Thread.Sleep(1000)
                 Application.DoEvents()
@@ -164,9 +167,15 @@ Public Class frmMain
         txtLists.Text = line
         'kaydet ve geç
         If txtLists.Text <> "" Then
+            Dim ix As Integer = 0
             items = txtLists.Text.Split(vbLf)
             For Each item In items
+                If item.StartsWith(alanlar1(ix)) Or item.StartsWith(alanlar2(ix)) Then
 
+                Else
+                    Dim s = db.UpdateSchool(no, alanlar(ix), item)
+                    ix += 1
+                End If
 
             Next
         End If

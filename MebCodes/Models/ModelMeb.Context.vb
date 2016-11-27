@@ -60,12 +60,14 @@ Partial Public Class MEBEntities
         Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of Nullable(Of Decimal))("InsertSchool", ilNoParameter, ilceNoParameter, adParameter, urlParameter, hakkindaUrlParameter, kurumKoduParameter)
     End Function
 
-    Public Overridable Function UpdateSchool(okulNo As Nullable(Of Integer), kurumKodu As String) As Integer
+    Public Overridable Function UpdateSchool(okulNo As Nullable(Of Integer), madde As String, deger As String) As Integer
         Dim okulNoParameter As ObjectParameter = If(okulNo.HasValue, New ObjectParameter("OkulNo", okulNo), New ObjectParameter("OkulNo", GetType(Integer)))
 
-        Dim kurumKoduParameter As ObjectParameter = If(kurumKodu IsNot Nothing, New ObjectParameter("KurumKodu", kurumKodu), New ObjectParameter("KurumKodu", GetType(String)))
+        Dim maddeParameter As ObjectParameter = If(madde IsNot Nothing, New ObjectParameter("Madde", madde), New ObjectParameter("Madde", GetType(String)))
 
-        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("UpdateSchool", okulNoParameter, kurumKoduParameter)
+        Dim degerParameter As ObjectParameter = If(deger IsNot Nothing, New ObjectParameter("deger", deger), New ObjectParameter("deger", GetType(String)))
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("UpdateSchool", okulNoParameter, maddeParameter, degerParameter)
     End Function
 
 End Class
