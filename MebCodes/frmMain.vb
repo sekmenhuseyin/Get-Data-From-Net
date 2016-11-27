@@ -3,9 +3,9 @@
 Public Class frmMain
     Dim il, ilce, sayfa, no As Integer, ad As String, sayfaVar, isLoaded As Boolean
     Dim db As MEBEntities = New MEBEntities()
-    Dim alanlar() = {"Tel", "Fax", "WEB", "Adres", "Vizyon", "Misyon", "Basarilar", "OgretmenSayi", "RehberSayi", "OgrenciSayi", "DerslikSayi", "MuzikSayi", "ResimSayi", "BtSayi", "Misafirhane", "Kutuphane", "LabSayi", "Hazirlik", "Konferans", "AtolyeSayi", "Spor", "OgretimSekli", "Yemekhane", "Kantin", "Revir", "Bahce", "DersSaati", "Isinma", "Internet", "Yabancı Dil", "Pansiyon Bilgileri", "LojmanSayi", "LojmanSayi", "Ulasim", "Servis", "Yerlesim", "Kontenjan", "PuanBilgi", "BasariDurumu", "YerlestirmeYuzde", "SporEtkinlik", "BilimEtkinlik", "Projeler", "YurtdisiProje"}
-    Dim alanlar1() = {"Telefon", "Belgegeçer", "WEB", "Adres", "Vizyon", "Misyon", "Başarılar", "Öğretmen", "Rehber Öğretmen", "Öğrenci", "Derslik", "Müzik Sınıfı", "Resim Sınıfı", "BT Sınıfı", "Misafirhane", "Kütüphane", "Fen Labaratuarı", "Hazırlık Sınıfı", "Konferans Salonu", "Atölye-İşlik", "Spor Salonu", "Öğretim Şekli", "Yemekhane", "Kantin", "Revir", "Bahçe", "Saatler", "Isınma", "Bağlantı", "Yabancı Dil", "Pansiyon Bilgileri", "Lojman", "Sayısı", "Ulaşım", "Servis", "Yerleşim Yeri", "Kontenjan Bilgileri", "Taban-Tavan Puan Bilgileri", "Okulun YGS/LYS Başarı Durumu", "LYS'de Öğrenci Yerleştirme Yüzdesi", "Sportif Etkinlikler", "Bilimsel Etkinlikler", "Proje Çalışmaları", "Yurtdışı Proje Faaliyetleri"}
-    Dim alanlar2() = {"Telefon", "Belgegeçer", "WEB", "Adres", "VİZYON", "MİSYON", "BAŞARILAR", "Öğretmen", "Rehber Öğretmen", "Öğrenci", "Derslik", "Müzik Sınıfı", "Resim Sınıfı", "BT Sınıfı", "Misafirhane", "Kütüphane", "Fen Labaratuarı", "Hazırlık Sınıfı", "Konferans Salonu", "Atölye-İşlik", "Spor Salonu", "Öğretim Şekli", "Yemekhane", "Kantin", "Revir", "Bahçe", "Saatler", "Isınma", "Bağlantı", "Yabancı Dil", "Pansiyon Bilgileri", "Lojman", "Sayısı", "Ulaşım", "Servis", "Yerleşim Yeri", "Kontenjan Bilgileri", "Taban-Tavan Puan Bilgileri", "Okulun YGS/LYS Başarı Durumu", "LYS'de Öğrenci Yerleştirme Yüzdesi", "Sportif Etkinlikler", "Bilimsel Etkinlikler", "Proje Çalışmaları", "Yurtdışı Proje Faaliyetleri"}
+    Dim alanlar() = {"Tel", "Fax", "WEB", "Adres", "Vizyon", "Misyon", "Basarilar", "OgretmenSayi", "RehberSayi", "OgrenciSayi", "DerslikSayi", "MuzikSayi", "ResimSayi", "BtSayi", "Misafirhane", "Kutuphane", "LabSayi", "Hazirlik", "Konferans", "AtolyeSayi", "Spor", "OgretimSekli", "Yemekhane", "Kantin", "Revir", "Bahce", "DersSaati", "Isinma", "Internet", "Yabancı Dil", "Pansiyon Bilgileri", "LojmanSayi", "LojmanSayi", "Ulasim", "Servis", "Yerlesim", "Uzaklik", "Kontenjan", "PuanBilgi", "BasariDurumu", "YerlestirmeYuzde", "SporEtkinlik", "BilimEtkinlik", "Projeler", "YurtdisiProje"}
+    Dim alanlar1() = {"Telefon", "Belgegeçer", "WEB", "Adres", "Vizyon", "Misyon", "Başarılar", "Öğretmen ", "Rehber Öğretmen ", "Öğrenci ", "Derslik", "Müzik Sınıfı", "Resim Sınıfı", "BT Sınıfı", "Misafirhane", "Kütüphane", "Fen Labaratuarı", "Hazırlık Sınıfı", "Konferans Salonu", "Atölye-İşlik", "Spor Salonu", "Öğretim Şekli", "Yemekhane", "Kantin", "Revir", "Bahçe", "Saatler", "Isınma", "Bağlantı", "Yabancı Dil", "Pansiyon Bilgileri", "Lojman", "Sayısı", "Ulaşım", "Servis Bilgisi", "Yerleşim Yeri", "İl/İlçe Merkezine Uzaklık", "Kontenjan Bilgileri", "Taban-Tavan Puan Bilgileri", "Okulun YGS/LYS Başarı Durumu", "LYS'de Öğrenci Yerleştirme Yüzdesi", "Sportif Etkinlikler", "Bilimsel Etkinlikler", "Proje Çalışmaları", "Yurtdışı Proje Faaliyetleri"}
+    Dim alanlar2() = {"Telefon", "Belgegeçer", "WEB", "Adres", "VİZYON", "MİSYON", "BAŞARILAR", "Öğretmen ", "Rehber Öğretmen ", "Öğrenci ", "Derslik", "Müzik Sınıfı", "Resim Sınıfı", "BT Sınıfı", "Misafirhane", "Kütüphane", "Fen Labaratuarı", "Hazırlık Sınıfı", "Konferans Salonu", "Atölye-İşlik", "Spor Salonu", "Öğretim Şekli", "Yemekhane", "Kantin", "Revir", "Bahçe", "Saatler", "Isınma", "Bağlantı", "Yabancı Dil", "Pansiyon Bilgileri", "Lojman", "Sayısı", "Ulaşım", "Servis Bilgisi", "Yerleşim Yeri", "İl/İlçe Merkezine Uzaklık", "Kontenjan Bilgileri", "Taban-Tavan Puan Bilgileri", "Okulun YGS/LYS Başarı Durumu", "LYS'de Öğrenci Yerleştirme Yüzdesi", "Sportif Etkinlikler", "Bilimsel Etkinlikler", "Proje Çalışmaları", "Yurtdışı Proje Faaliyetleri"}
     'frm load
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'SetBrowserFeatureControl()
@@ -41,6 +41,7 @@ Public Class frmMain
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         Me.Enabled = False
         Dim tbl = db.Okuls.OrderBy(Function(m) m.No).ToList()
+        Me.Enabled = True
         For Each item In tbl
             isLoaded = False
             'ad = "http://abdulkadirpaksoyanadolulisesi.meb.k12.tr" : ReloadFrame("http://abdulkadirpaksoyanadolulisesi.meb.k12.tr/meb_iys_dosyalar/01/01/111573/okulumuz_hakkinda.html")
@@ -51,11 +52,14 @@ Public Class frmMain
                 'isLoaded = True
             Loop
         Next
-        Me.Enabled = True
     End Sub
     'web browser
     Private Sub WebBrowser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles WebBrowser1.DocumentCompleted
-        UpdateSchools()
+        Try
+            UpdateSchools()
+        Catch ex As ArgumentException
+
+        End Try
         Application.DoEvents() : isLoaded = True
     End Sub
     'illeri bulur
@@ -134,7 +138,7 @@ Public Class frmMain
             txtLists.Text = txtLists.Text.Replace(" style=""clear: both;""", "").Replace("<a title=""Eposta Gönder"" class=""thickbox"" href=""" & ad & "/www/eposta/eposta_gonder.php?KeepThis=true&amp;width=530&amp;height=400&amp;TB_iframe=true"" target=""_blank"">Göndermek için tıklayınız</a>", "")
             txtLists.Text = txtLists.Text.Replace("<a onclick=""window.print();return false""><img src=""/tema/tema/3/img/printButton.png""></a>", "")
             txtLists.Text = txtLists.Text.Replace("Eposta", "").Replace("Yazdır", "").Replace(" class=""""", "").Replace("<input ", "").Replace("<span>", "").Replace("</span>", "")
-            txtLists.Text = txtLists.Text.Replace("<i class=""fa""></i>", "").Replace("<input>", "").Replace("<div>", "").Replace("</div>", "").Replace(vbTab, "")
+            txtLists.Text = txtLists.Text.Replace("<i class=""fa""></i>", "").Replace("<input>", "").Replace("<div>", "").Replace("</div>", "").Replace(vbTab, "").Replace("&lt;", "")
         Else 'table ise
             Dim allelements As HtmlElementCollection = WebBrowser1.Document.GetElementsByTagName("table")
             For Each webpageelement As HtmlElement In allelements
@@ -153,7 +157,7 @@ Public Class frmMain
                     txtLists.Text = txtLists.Text.Replace("</tr>", "").Replace("<tr>", "").Replace("<td>", "").Replace("</td>", "")
                     txtLists.Text = txtLists.Text.Replace("<a href=""" & ad & "/tema/eposta/eposta_gonder.php?CHK=&amp;iframe=true&amp;width=600&amp;height=550"" rel=""prettyPhoto"">Göndermek için tıklayınız</a>", "")
                     txtLists.Text = txtLists.Text.Replace("<a style=""opacity: 1;"" onclick=""window.print();return false"" href=""#print""><img src=""http://www.meb.gov.tr/www/images/ico/printButton.png""></a>", "")
-                    txtLists.Text = txtLists.Text.Replace("Eposta", "").Replace("Yazdır :", "").Replace(">", "")
+                    txtLists.Text = txtLists.Text.Replace("Eposta", "").Replace("Yazdır :", "").Replace(">", "").Replace("&lt;", "")
                     Exit For
                 End If
             Next
@@ -167,14 +171,27 @@ Public Class frmMain
         txtLists.Text = line
         'kaydet ve geç
         If txtLists.Text <> "" Then
-            Dim ix As Integer = 0
+            Dim ix As Integer = 0, adVar As Boolean, totalStr = ""
             items = txtLists.Text.Split(vbLf)
             For Each item In items
-                If item.StartsWith(alanlar1(ix)) Or item.StartsWith(alanlar2(ix)) Then
-
+                adVar = False
+                'ix bulunur
+                For i = 0 To alanlar1.Length - 1
+                    If Strings.Left(item, alanlar1(i).Length) = alanlar1(i) Or Strings.Left(item, alanlar1(i).Length) = alanlar2(i) Then
+                        ix = i : adVar = True : totalStr = "" : Exit For
+                    End If
+                Next
+                If adVar = True Then
+                    'belki deger buradadır
+                    item = item.Replace(alanlar1(ix), "").Replace(alanlar2(ix), "").Replace(":", "").Trim()
+                    If item <> "" Then
+                        Dim s = db.UpdateSchool(no, alanlar(ix), item.Replace("checked", "1"))
+                    End If
                 Else
-                    Dim s = db.UpdateSchool(no, alanlar(ix), item)
-                    ix += 1
+                    If totalStr <> "" Then totalStr &= ", "
+                    totalStr &= item.Replace("checked", "1")
+                    Dim s = db.UpdateSchool(no, alanlar(ix), totalStr)
+
                 End If
 
             Next

@@ -27,7 +27,7 @@ Partial Public Class Okul
     Public Property RehberSayi As Integer
     Public Property OgrenciSayi As Integer
     Public Property OgretimSekli As String
-    Public Property DersSaati As Integer
+    Public Property DersSaati As String
     Public Property DerslikSayi As Integer
     Public Property AtolyeSayi As Integer
     Public Property LabSayi As Integer
@@ -45,7 +45,7 @@ Partial Public Class Okul
     Public Property Kantin As Boolean
     Public Property Revir As Boolean
     Public Property Bahce As Boolean
-    Public Property LojmanSayi As Integer
+    Public Property Lojman As String
     Public Property Isinma As String
     Public Property Uzaklik As String
     Public Property Ulasim As String
@@ -54,7 +54,6 @@ Partial Public Class Okul
     Public Property Kontenjan As String
     Public Property PuanBilgi As String
     Public Property BasariDurumu As String
-    Public Property YerlestirmeYuzde As String
     Public Property SporEtkinlik As String
     Public Property BilimEtkinlik As String
     Public Property Projeler As String
