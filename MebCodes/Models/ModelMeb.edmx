@@ -40,16 +40,16 @@
           <Property Name="OgretmenSayi" Type="int" Nullable="false" />
           <Property Name="RehberSayi" Type="int" Nullable="false" />
           <Property Name="OgrenciSayi" Type="int" Nullable="false" />
-          <Property Name="OgretimSekli" Type="nvarchar" MaxLength="50" />
-          <Property Name="DersSaati" Type="nvarchar" MaxLength="50" />
+          <Property Name="OgretimSekli" Type="nvarchar(max)" />
+          <Property Name="DersSaati" Type="nvarchar(max)" />
           <Property Name="DerslikSayi" Type="int" Nullable="false" />
           <Property Name="AtolyeSayi" Type="int" Nullable="false" />
           <Property Name="LabSayi" Type="int" Nullable="false" />
           <Property Name="BtSayi" Type="int" Nullable="false" />
           <Property Name="ResimSayi" Type="int" Nullable="false" />
           <Property Name="MuzikSayi" Type="int" Nullable="false" />
-          <Property Name="YabanciDil" Type="nvarchar" MaxLength="50" />
-          <Property Name="Internet" Type="nvarchar" MaxLength="50" />
+          <Property Name="YabanciDil" Type="nvarchar(max)" />
+          <Property Name="Internet" Type="nvarchar(max)" />
           <Property Name="Hazirlik" Type="bit" Nullable="false" />
           <Property Name="Konferans" Type="bit" Nullable="false" />
           <Property Name="Spor" Type="bit" Nullable="false" />
@@ -59,8 +59,8 @@
           <Property Name="Kantin" Type="bit" Nullable="false" />
           <Property Name="Revir" Type="bit" Nullable="false" />
           <Property Name="Bahce" Type="bit" Nullable="false" />
-          <Property Name="Lojman" Type="nvarchar" MaxLength="50" />
-          <Property Name="Isinma" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lojman" Type="nvarchar(max)" />
+          <Property Name="Isinma" Type="nvarchar(max)" />
           <Property Name="Uzaklik" Type="nvarchar(max)" />
           <Property Name="Ulasim" Type="nvarchar(max)" />
           <Property Name="Servis" Type="nvarchar(max)" />
@@ -220,16 +220,16 @@
           <Property Name="OgretmenSayi" Type="Int32" Nullable="false" />
           <Property Name="RehberSayi" Type="Int32" Nullable="false" />
           <Property Name="OgrenciSayi" Type="Int32" Nullable="false" />
-          <Property Name="OgretimSekli" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DersSaati" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OgretimSekli" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DersSaati" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DerslikSayi" Type="Int32" Nullable="false" />
           <Property Name="AtolyeSayi" Type="Int32" Nullable="false" />
           <Property Name="LabSayi" Type="Int32" Nullable="false" />
           <Property Name="BtSayi" Type="Int32" Nullable="false" />
           <Property Name="ResimSayi" Type="Int32" Nullable="false" />
           <Property Name="MuzikSayi" Type="Int32" Nullable="false" />
-          <Property Name="YabanciDil" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Internet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YabanciDil" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Internet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Hazirlik" Type="Boolean" Nullable="false" />
           <Property Name="Konferans" Type="Boolean" Nullable="false" />
           <Property Name="Spor" Type="Boolean" Nullable="false" />
@@ -239,8 +239,8 @@
           <Property Name="Kantin" Type="Boolean" Nullable="false" />
           <Property Name="Revir" Type="Boolean" Nullable="false" />
           <Property Name="Bahce" Type="Boolean" Nullable="false" />
-          <Property Name="Lojman" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Isinma" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lojman" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Isinma" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Uzaklik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Ulasim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Servis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -248,6 +248,7 @@
           <Property Name="Kontenjan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PuanBilgi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BasariDurumu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YerlestirmeYuzde" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SporEtkinlik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BilimEtkinlik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Projeler" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -301,6 +302,7 @@
                 <ScalarProperty Name="Projeler" ColumnName="Projeler" />
                 <ScalarProperty Name="BilimEtkinlik" ColumnName="BilimEtkinlik" />
                 <ScalarProperty Name="SporEtkinlik" ColumnName="SporEtkinlik" />
+                <ScalarProperty Name="YerlestirmeYuzde" ColumnName="YerlestirmeYuzde" />
                 <ScalarProperty Name="BasariDurumu" ColumnName="BasariDurumu" />
                 <ScalarProperty Name="PuanBilgi" ColumnName="PuanBilgi" />
                 <ScalarProperty Name="Kontenjan" ColumnName="Kontenjan" />

@@ -1,11 +1,11 @@
 ﻿Imports Microsoft.Win32
 
 Public Class frmMain
-    Dim il, ilce, sayfa, no As Integer, ad As String, sayfaVar, isLoaded As Boolean
+    Dim il, ilce, sayfa, no As Integer, ad As String, sayfaVar As Boolean
     Dim db As MEBEntities = New MEBEntities()
-    Dim alanlar() = {"Tel", "Fax", "WEB", "Adres", "Vizyon", "Misyon", "Basarilar", "OgretmenSayi", "RehberSayi", "OgrenciSayi", "DerslikSayi", "MuzikSayi", "ResimSayi", "BtSayi", "Misafirhane", "Kutuphane", "LabSayi", "Hazirlik", "Konferans", "AtolyeSayi", "Spor", "OgretimSekli", "Yemekhane", "Kantin", "Revir", "Bahce", "DersSaati", "Isinma", "Internet", "Yabancı Dil", "Pansiyon Bilgileri", "LojmanSayi", "LojmanSayi", "Ulasim", "Servis", "Yerlesim", "Uzaklik", "Kontenjan", "PuanBilgi", "BasariDurumu", "YerlestirmeYuzde", "SporEtkinlik", "BilimEtkinlik", "Projeler", "YurtdisiProje"}
-    Dim alanlar1() = {"Telefon", "Belgegeçer", "WEB", "Adres", "Vizyon", "Misyon", "Başarılar", "Öğretmen ", "Rehber Öğretmen ", "Öğrenci ", "Derslik", "Müzik Sınıfı", "Resim Sınıfı", "BT Sınıfı", "Misafirhane", "Kütüphane", "Fen Labaratuarı", "Hazırlık Sınıfı", "Konferans Salonu", "Atölye-İşlik", "Spor Salonu", "Öğretim Şekli", "Yemekhane", "Kantin", "Revir", "Bahçe", "Saatler", "Isınma", "Bağlantı", "Yabancı Dil", "Pansiyon Bilgileri", "Lojman", "Sayısı", "Ulaşım", "Servis Bilgisi", "Yerleşim Yeri", "İl/İlçe Merkezine Uzaklık", "Kontenjan Bilgileri", "Taban-Tavan Puan Bilgileri", "Okulun YGS/LYS Başarı Durumu", "LYS'de Öğrenci Yerleştirme Yüzdesi", "Sportif Etkinlikler", "Bilimsel Etkinlikler", "Proje Çalışmaları", "Yurtdışı Proje Faaliyetleri"}
-    Dim alanlar2() = {"Telefon", "Belgegeçer", "WEB", "Adres", "VİZYON", "MİSYON", "BAŞARILAR", "Öğretmen ", "Rehber Öğretmen ", "Öğrenci ", "Derslik", "Müzik Sınıfı", "Resim Sınıfı", "BT Sınıfı", "Misafirhane", "Kütüphane", "Fen Labaratuarı", "Hazırlık Sınıfı", "Konferans Salonu", "Atölye-İşlik", "Spor Salonu", "Öğretim Şekli", "Yemekhane", "Kantin", "Revir", "Bahçe", "Saatler", "Isınma", "Bağlantı", "Yabancı Dil", "Pansiyon Bilgileri", "Lojman", "Sayısı", "Ulaşım", "Servis Bilgisi", "Yerleşim Yeri", "İl/İlçe Merkezine Uzaklık", "Kontenjan Bilgileri", "Taban-Tavan Puan Bilgileri", "Okulun YGS/LYS Başarı Durumu", "LYS'de Öğrenci Yerleştirme Yüzdesi", "Sportif Etkinlikler", "Bilimsel Etkinlikler", "Proje Çalışmaları", "Yurtdışı Proje Faaliyetleri"}
+    Dim alanlar() = {"Tel", "Fax", "WEB", "Adres", "Vizyon", "Misyon", "Basarilar", "OgretmenSayi", "RehberSayi", "OgrenciSayi", "DerslikSayi", "MuzikSayi", "ResimSayi", "BtSayi", "Misafirhane", "Kutuphane", "LabSayi", "Hazirlik", "Konferans", "AtolyeSayi", "Spor", "OgretimSekli", "Yemekhane", "Kantin", "Revir", "Bahce", "DersSaati", "Isinma", "Internet", "Yabancı Dil", "Pansiyon Bilgileri", "LojmanSayi", "Ulasim", "Servis", "Yerlesim", "Uzaklik", "Kontenjan", "PuanBilgi", "BasariDurumu", "YerlestirmeYuzde", "SporEtkinlik", "BilimEtkinlik", "Projeler", "YurtdisiProje", "Diğer"}
+    Dim alanlar1() = {"Telefon", "Belgegeçer", "WEB", "Adres", "Vizyon", "Misyon", "Başarılar", "Öğretmen ", "Rehber Öğretmen ", "Öğrenci ", "Derslik", "Müzik Sınıfı", "Resim Sınıfı", "BT Sınıfı", "Misafirhane", "Kütüphane", "Fen Labaratuarı", "Hazırlık Sınıfı", "Konferans Salonu", "Atölye-İşlik", "Spor Salonu", "Öğretim Şekli", "Yemekhane", "Kantin", "Revir", "Bahçe", "Saatler", "Isınma", "Bağlantı", "Yabancı Dil", "Pansiyon Bilgileri", "Lojman", "Ulaşım", "Servis Bilgisi", "Yerleşim Yeri", "İl/İlçe Merkezine Uzaklık", "Kontenjan Bilgileri", "Taban-Tavan Puan Bilgileri", "Okulun YGS/LYS Başarı Durumu", "LYS'de Öğrenci Yerleştirme Yüzdesi", "Sportif Etkinlikler", "Bilimsel Etkinlikler", "Proje Çalışmaları", "Yurtdışı Proje Faaliyetleri", "Diğer Hususlar"}
+    Dim alanlar2() = {"Telefon", "Faks", "WEB Adresi", "Adres", "VİZYON", "MİSYON", "BAŞARILAR", "Öğretmen Sayısı", "Rehber Öğretmen Sayısı", "Öğrenci Sayısı", "Derslik Sayısı", "Müzik Sınıfı Sayısı", "Resim Sınıfı Sayısı", "BT(Bilgisayar) Sınıfı Sayısı", "Misafirhane", "Kütüphane", "Fen Labaratuarı Sayısı", "Hazırlık Sınıfı", "Konferans Salonu", "Atölye-İşlik Sayısı", "Spor Salonu", "Öğretim Şekli", "Yemekhane", "Kantin", "Revir", "Bahçe", "Ders Başlama ve Bitiş Saati", "Isınma", "İnternet Bağlantısı", "Yabancı Dil", "Pansiyon Bilgisi", "Lojman Sayısı", "Ulaşım", "Servis Bilgisi", "Yerleşim Yeri", "İl ve İlçe Merkezine Uzaklık", "Kontenjan Bilgileri", "Taban-Tavan Puan Bilgileri", "Okulun YGS/LYS Başarı Durumu", "LYS'de Öğrenci Yerleştirme Yüzdesi", "Sportif Etkinlikler", "Bilimsel Etkinlikleri", "Proje Çalışmaları", "Yurtdışı Proje Faaliyetleri", "DİĞER HUSUSLAR"}
     'frm load
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'SetBrowserFeatureControl()
@@ -14,7 +14,7 @@ Public Class frmMain
     End Sub
     'resize
     Private Sub frmMain_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-        WebBrowser1.Height = Me.Height - 70
+        Browser.Height = Me.Height - 70
         txtLists.Height = Me.Height - 100
     End Sub
     'tüm ilcelerde döngü yap
@@ -27,11 +27,10 @@ Public Class frmMain
             sayfaVar = True
             ad = db.GetIlceAd(il, ilce).FirstOrDefault()
             Do While sayfaVar = True
-                isLoaded = False
                 ReloadFrame()
-                Do While isLoaded = False
-                    Threading.Thread.Sleep(1000)
+                Do Until Browser.ReadyState = WebBrowserReadyState.Complete
                     Application.DoEvents()
+                    Threading.Thread.Sleep(5000)
                 Loop
                 sayfa += 1
             Loop
@@ -39,33 +38,28 @@ Public Class frmMain
     End Sub
     'okul ayrıntılarını kaydet
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Me.Enabled = False
         Dim tbl = db.Okuls.OrderBy(Function(m) m.No).ToList()
-        Me.Enabled = True
         For Each item In tbl
-            isLoaded = False
-            'ad = "http://abdulkadirpaksoyanadolulisesi.meb.k12.tr" : ReloadFrame("http://abdulkadirpaksoyanadolulisesi.meb.k12.tr/meb_iys_dosyalar/01/01/111573/okulumuz_hakkinda.html")
-            ad = item.Url : ReloadFrame(item.HakkindaUrl) : no = item.No
-            Do While isLoaded = False
-                Threading.Thread.Sleep(1000)
+            ad = item.Url : no = item.No
+            ReloadFrame(item.HakkindaUrl)
+            Do Until Browser.ReadyState = WebBrowserReadyState.Complete
                 Application.DoEvents()
-                'isLoaded = True
+                Threading.Thread.Sleep(5000)
             Loop
+            ReloadFrame("about:blank")
         Next
     End Sub
     'web browser
-    Private Sub WebBrowser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles WebBrowser1.DocumentCompleted
-        Try
-            UpdateSchools()
-        Catch ex As ArgumentException
-
-        End Try
-        Application.DoEvents() : isLoaded = True
+    Private Sub Browser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles Browser.DocumentCompleted
+        'generatecities()
+        'generatetowns()
+        'generateschools()
+        UpdateSchools()
     End Sub
     'illeri bulur
     Private Sub GenerateCities()
         'iller
-        Dim allelements As HtmlElementCollection = WebBrowser1.Document.All
+        Dim allelements As HtmlElementCollection = Browser.Document.All
         For Each webpageelement As HtmlElement In allelements
             If webpageelement.Id = "jumpMenu5" Then txtLists.Text = webpageelement.InnerHtml
         Next
@@ -78,7 +72,7 @@ Public Class frmMain
     'ilçeleri bulur
     Private Sub GenerateTowns()
         'ilçeler
-        Dim allelements As HtmlElementCollection = WebBrowser1.Document.All
+        Dim allelements As HtmlElementCollection = Browser.Document.All
         For Each webpageelement As HtmlElement In allelements
             If webpageelement.Id = "jumpMenu6" Then txtLists.Text = webpageelement.InnerHtml
         Next
@@ -91,7 +85,7 @@ Public Class frmMain
     'okulları bulur
     Private Sub GenerateSchools()
         'okullar
-        Dim allelements As HtmlElementCollection = WebBrowser1.Document.GetElementsByTagName("table")
+        Dim allelements As HtmlElementCollection = Browser.Document.GetElementsByTagName("table")
         For Each webpageelement As HtmlElement In allelements
             If webpageelement.TagName.ToLower() = "table" And webpageelement.GetAttribute("classname") = "table" Then
                 txtLists.Text = webpageelement.InnerHtml
@@ -124,7 +118,7 @@ Public Class frmMain
     'okulları günceller
     Private Sub UpdateSchools()
         'okul ayrıntıları
-        Dim webelement As HtmlElement = WebBrowser1.Document.GetElementById("hakkinda_kutu")
+        Dim webelement As HtmlElement = Browser.Document.GetElementById("hakkinda_kutu")
         'div ise
         If IsNothing(webelement) = False Then
             txtLists.Text = webelement.InnerHtml
@@ -140,9 +134,9 @@ Public Class frmMain
             txtLists.Text = txtLists.Text.Replace("Eposta", "").Replace("Yazdır", "").Replace(" class=""""", "").Replace("<input ", "").Replace("<span>", "").Replace("</span>", "")
             txtLists.Text = txtLists.Text.Replace("<i class=""fa""></i>", "").Replace("<input>", "").Replace("<div>", "").Replace("</div>", "").Replace(vbTab, "").Replace("&lt;", "")
         Else 'table ise
-            Dim allelements As HtmlElementCollection = WebBrowser1.Document.GetElementsByTagName("table")
+            Dim allelements As HtmlElementCollection = Browser.Document.GetElementsByTagName("table")
             For Each webpageelement As HtmlElement In allelements
-                If webpageelement.TagName.ToLower() = "table" And webpageelement.GetAttribute("classname") = "table" Then
+                If webpageelement.GetAttribute("classname") = "table" Then
                     txtLists.Text = webpageelement.InnerHtml
                     txtLists.Text = txtLists.Text.Replace(" colspan=""3""", "").Replace(" width=""15""", "").Replace(" width=""100""", "").Replace(" width=""100""", "").Replace(" width=""100%""", "").Replace("noprint", "").Replace("bordernone", "")
                     txtLists.Text = txtLists.Text.Replace(" disabled=""disabled""", "").Replace(" class=""""", "").Replace(" type=""checkbox""", "").Replace(" value=""""", "").Replace("=""""", "")
@@ -161,6 +155,37 @@ Public Class frmMain
                     Exit For
                 End If
             Next
+            If txtLists.Text = "" Then
+                Dim allelements2 As HtmlElementCollection = Browser.Document.GetElementsByTagName("table")
+                Dim onay = False
+                For Each webpageelement As HtmlElement In allelements2
+                    If onay = True Then
+                        txtLists.Text = webpageelement.InnerHtml
+                        txtLists.Text = txtLists.Text.Replace(" width=""8""", "").Replace(" width=""778""", "").Replace(" width=""780""", "").Replace(" border=""0""", "").Replace(" align=""center""", "").Replace(" colspan=""7""", "").Replace(" width=""180""", "").Replace(" valign=""top""", "")
+                        txtLists.Text = txtLists.Text.Replace("<img alt=""MEB"" src=""" & ad & "/www/images/mansetresim.png"">", "").Replace("<a href=""" & ad & "/meb_iys_dosyalar/01/01/726185/"">", "").Replace(" height=""35""", "").Replace(" valign=""middle""", "").Replace(" style=""color: rgb(196, 30, 46);""", "").Replace(" height=""40""", "").Replace(" height=""54""", "").Replace("width=""90%""", "")
+                        txtLists.Text = txtLists.Text.Replace(" width=""30%""", "").Replace(" width=""70%""", "").Replace(" width=""20%""", "").Replace(" width=""25%""", "").Replace(" width=""200""", "")
+                        txtLists.Text = txtLists.Text.Replace(" id=""okulkodu""", "").Replace(" id=""okuladi""", "").Replace(" id=""telefon""", "").Replace(" id=""faks""", "").Replace(" id=""webadres""", "").Replace(" id=""adres""", "").Replace(" id=""vizyon""", "").Replace(" id=""misyon""", "").Replace(" id=""ogretmensayisi""", "").Replace(" id=""ogrencisayisi""", "")
+                        txtLists.Text = txtLists.Text.Replace(" id=""ulasim""", "").Replace(" id=""yerlesimbilgisi""", "").Replace(" id=""dersliksayisi""", "").Replace(" id=""atolyeislik""", "").Replace(" id=""internet""", "").Replace(" id=""konferanssalonu""", "").Replace(" id=""sporsalonu""", "").Replace(" id=""yemekhane""", "")
+                        txtLists.Text = txtLists.Text.Replace(" id=""misafirhane""", "").Replace(" id=""Kutuphane""", "").Replace(" id=""uzaklik""", "").Replace(" id=""ulasim""", "").Replace(" id=""fenlab""", "").Replace(" id=""bilgisayarlab""", "")
+                        txtLists.Text = txtLists.Text.Replace("style=""height: 1px;""", "").Replace(" class=""sol""", "").Replace(" align=""left""", "")
+                        txtLists.Text = txtLists.Text.Replace(" colspan=""3""", "").Replace(" width=""15""", "").Replace(" width=""100""", "").Replace(" width=""100""", "").Replace(" width=""100%""", "").Replace("noprint", "").Replace("bordernone", "")
+                        txtLists.Text = txtLists.Text.Replace(" disabled=""disabled""", "").Replace(" class=""""", "").Replace(" type=""checkbox""", "").Replace(" value=""""", "").Replace("=""""", "")
+                        txtLists.Text = txtLists.Text.Replace(" fa-phone", "").Replace(" fa-envelope", "").Replace(" fa-globe", "").Replace(" fa-map-marker", "").Replace(" fa-flag-o", "").Replace(" fa-flag", "")
+                        txtLists.Text = txtLists.Text.Replace(" fa-graduation-cap", "").Replace(" fa-user", "").Replace(" fa-child", "").Replace(" fa-picture-o", "").Replace(" fa-music", "").Replace(" fa-building-o", "")
+                        txtLists.Text = txtLists.Text.Replace(" fa-fax", "").Replace(" fa-building", "").Replace(" fa-laptop", "").Replace(" fa-bed", "").Replace(" fa-university", "").Replace(" fa-flask", "").Replace(" fa-microphone", "").Replace(" fa-wrench", "").Replace(" fa-futbol-o", "")
+                        txtLists.Text = txtLists.Text.Replace(" fa-code-fork", "").Replace(" fa-cutlery", "").Replace(" fa-heartbeat", "").Replace(" fa-tree", "").Replace(" fa-clock-o", "").Replace(" fa-wifi", "").Replace(" fa-language", "")
+                        txtLists.Text = txtLists.Text.Replace(" fa-print", "").Replace(" fa-fire", "").Replace(" fa-home", "").Replace(" fa-subway", "").Replace(" fa-thumb-tack", "").Replace(" fa-street-view", "").Replace(" fa-line-chart", "").Replace(" fa-info", "")
+                        txtLists.Text = txtLists.Text.Replace(" name=""chk_kutuphane""", "").Replace(" name=""chk_misafirhane""", "").Replace(" name=""chk_konferanssalonu""", "").Replace(" name=""chk_sporsalonu""", "").Replace(" name=""chk_kantin""", "").Replace(" name=""chk_bahce""", "").Replace(" name=""chk_revir""", "").Replace(" name=""chk_yemekhane""", "")
+                        txtLists.Text = txtLists.Text.Replace("<i class=""fa""></i>", "").Replace("<input>", "").Replace("<input ", "").Replace(vbTab, "").Replace("KURUM BİLGİLERİ", "").Replace("OKULUN SOSYAL VE KÜLTÜREL ETKİNLİKLERİ", "").Replace("Lojman Bilgisi", "")
+                        txtLists.Text = txtLists.Text.Replace("<a href=""" & ad & "/tema/eposta/eposta_gonder.php?CHK=&amp;iframe=true&amp;width=600&amp;height=550"" rel=""prettyPhoto"">Göndermek için tıklayınız</a>", "")
+                        txtLists.Text = txtLists.Text.Replace("<a style=""opacity: 1;"" onclick=""window.print();return false"" href=""#print""><img src=""http://www.meb.gov.tr/www/images/ico/printButton.png""></a>", "").Replace("</a>", "")
+                        txtLists.Text = txtLists.Text.Replace("<table>", "").Replace("</table>", "").Replace("<tbody>", "").Replace("</tbody>", "").Replace("</tr>", "").Replace("<tr>", "").Replace("<td>", "").Replace("</td>", "").Replace("<div>", "").Replace("</div>", "")
+                        txtLists.Text = txtLists.Text.Replace("Eposta", "").Replace("Yazdır", "").Replace(":", "").Replace("<hr>", "").Replace("<table >", "").Replace("<hr >", "").Replace("&lt;", "").Replace("&nbsp;", "")
+                        Exit For
+                    End If
+                    onay = True
+                Next
+            End If
         End If
         'clean empty lines
         txtLists.Text = txtLists.Text.Trim()
@@ -191,16 +216,17 @@ Public Class frmMain
                     If totalStr <> "" Then totalStr &= ", "
                     totalStr &= item.Replace("checked", "1")
                     Dim s = db.UpdateSchool(no, alanlar(ix), totalStr)
-
                 End If
-
             Next
+        Else
+            txtLists.Text = ""
         End If
+        txtLists.Text = ""
     End Sub
     'reload frame
     Private Sub ReloadFrame(Optional url As String = "")
         If url = "" Then url = "http://www.meb.gov.tr/baglantilar/okullar/?ILKODU=" & il & "&ILCEKODU=" & ilce & "&SAYFANO=" & sayfa
-        lblUrl1.Text = url.Replace("&", "&&") : WebBrowser1.Navigate(url) ', "_top", Nothing, "User-Agent: Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Safari/537.36")
+        lblUrl1.Text = url.Replace("&", "&&") : Browser.Navigate(url) ', "_top", Nothing, "User-Agent: Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Safari/537.36")
     End Sub
     'xtra
     Private Sub SetBrowserFeatureControlKey(feature As String, appName As String, value As UInteger)

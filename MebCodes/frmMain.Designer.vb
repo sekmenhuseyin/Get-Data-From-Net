@@ -22,21 +22,21 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
+        Me.Browser = New System.Windows.Forms.WebBrowser()
         Me.lblUrl1 = New System.Windows.Forms.Label()
         Me.txtLists = New System.Windows.Forms.TextBox()
         Me.btnStart = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'WebBrowser1
+        'Browser
         '
-        Me.WebBrowser1.Location = New System.Drawing.Point(15, 25)
-        Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.ScriptErrorsSuppressed = True
-        Me.WebBrowser1.Size = New System.Drawing.Size(863, 628)
-        Me.WebBrowser1.TabIndex = 0
+        Me.Browser.Location = New System.Drawing.Point(15, 25)
+        Me.Browser.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.Browser.Name = "Browser"
+        Me.Browser.ScriptErrorsSuppressed = True
+        Me.Browser.Size = New System.Drawing.Size(863, 628)
+        Me.Browser.TabIndex = 0
         '
         'lblUrl1
         '
@@ -80,7 +80,7 @@ Partial Class frmMain
         Me.ClientSize = New System.Drawing.Size(1173, 665)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnStart)
-        Me.Controls.Add(Me.WebBrowser1)
+        Me.Controls.Add(Me.Browser)
         Me.Controls.Add(Me.txtLists)
         Me.Controls.Add(Me.lblUrl1)
         Me.Name = "frmMain"
@@ -91,7 +91,7 @@ Partial Class frmMain
 
     End Sub
 
-    Friend WithEvents WebBrowser1 As WebBrowser
+    Friend WithEvents Browser As WebBrowser
     Friend WithEvents lblUrl1 As Label
     Friend WithEvents txtLists As TextBox
     Friend WithEvents btnStart As Button

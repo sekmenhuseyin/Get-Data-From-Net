@@ -54,6 +54,7 @@ Partial Public Class Okul
     Public Property Kontenjan As String
     Public Property PuanBilgi As String
     Public Property BasariDurumu As String
+    Public Property YerlestirmeYuzde As String
     Public Property SporEtkinlik As String
     Public Property BilimEtkinlik As String
     Public Property Projeler As String
