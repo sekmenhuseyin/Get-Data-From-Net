@@ -180,6 +180,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="db.sql" />
     <Content Include="Models\ModelMeb.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelMeb.Context.vb</LastGenOutput>
