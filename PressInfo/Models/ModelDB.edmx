@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PressInfoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Yayınevi">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YayineviBirligiNo" Type="tinyint" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Logo" Type="varchar(max)" Nullable="false" />
+          <Property Name="Link" Type="varchar(max)" Nullable="false" />
+          <Property Name="Sehir" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ResmiAd" Type="nvarchar(max)" />
+          <Property Name="Tarih" Type="varchar(max)" />
+          <Property Name="Yetkili" Type="nvarchar(max)" />
+          <Property Name="Adres" Type="nvarchar(max)" />
+          <Property Name="Tel" Type="nvarchar(max)" />
+          <Property Name="Faks" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Web" Type="nvarchar(max)" />
+          <Property Name="Bilgi" Type="nvarchar(max)" />
+          <Property Name="Alan" Type="nvarchar(max)" />
+          <Property Name="ISBN" Type="varchar" MaxLength="50" />
+          <Property Name="bitti" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="YayineviKategorileri">
+          <Key>
+            <PropertyRef Name="YayineviNo" />
+            <PropertyRef Name="KategoriNo" />
+          </Key>
+          <Property Name="YayineviNo" Type="int" Nullable="false" />
+          <Property Name="KategoriNo" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_YayineviKategorileri_Kategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+          <End Role="YayineviKategorileri" Type="Self.YayineviKategorileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="YayineviKategorileri">
+              <PropertyRef Name="KategoriNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_YayineviKategorileri_Yayınevi">
+          <End Role="Yayınevi" Type="Self.Yayınevi" Multiplicity="1" />
+          <End Role="YayineviKategorileri" Type="Self.YayineviKategorileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yayınevi">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="YayineviKategorileri">
+              <PropertyRef Name="YayineviNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="InsertPress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Ad" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Link" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Logo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Sehir" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="UpdatePress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="No" Type="int" Mode="In" />
+          <Parameter Name="ResmiAd" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Tarih" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Yetkili" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Adres" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Tel" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Faks" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Web" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Bilgi" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Alan" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ISBN" Type="varchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="PressInfoModelStoreContainer">
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yayınevi" EntityType="Self.Yayınevi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="YayineviKategorileri" EntityType="Self.YayineviKategorileri" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_YayineviKategorileri_Kategori" Association="Self.FK_YayineviKategorileri_Kategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="YayineviKategorileri" EntitySet="YayineviKategorileri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_YayineviKategorileri_Yayınevi" Association="Self.FK_YayineviKategorileri_Yayınevi">
+            <End Role="Yayınevi" EntitySet="Yayınevi" />
+            <End Role="YayineviKategorileri" EntitySet="YayineviKategorileri" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PressInfoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Yayınevi">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ResmiAd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tarih" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Yetkili" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Web" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Bilgi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Alan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sehir" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kategoris" Relationship="PressInfoModel.YayineviKategorileri" FromRole="Yayınevi" ToRole="Kategori" />
+          <Property Name="Faks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YayineviBirligiNo" Type="Byte" Nullable="false" />
+          <Property Name="bitti" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PressInfoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Yayınevi" EntityType="Self.Yayınevi" />
+          <FunctionImport Name="InsertPress">
+            <Parameter Name="Ad" Mode="In" Type="String" />
+            <Parameter Name="Link" Mode="In" Type="String" />
+            <Parameter Name="Logo" Mode="In" Type="String" />
+            <Parameter Name="Sehir" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePress">
+            <Parameter Name="No" Mode="In" Type="Int32" />
+            <Parameter Name="ResmiAd" Mode="In" Type="String" />
+            <Parameter Name="Tarih" Mode="In" Type="String" />
+            <Parameter Name="Yetkili" Mode="In" Type="String" />
+            <Parameter Name="Adres" Mode="In" Type="String" />
+            <Parameter Name="Tel" Mode="In" Type="String" />
+            <Parameter Name="Faks" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Web" Mode="In" Type="String" />
+            <Parameter Name="Bilgi" Mode="In" Type="String" />
+            <Parameter Name="Alan" Mode="In" Type="String" />
+            <Parameter Name="ISBN" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Kategoris" EntityType="PressInfoModel.Kategori" />
+          <AssociationSet Name="YayineviKategorileri" Association="PressInfoModel.YayineviKategorileri">
+            <End Role="Kategori" EntitySet="Kategoris" />
+            <End Role="Yayınevi" EntitySet="Yayınevi" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Yayınevi" Relationship="PressInfoModel.YayineviKategorileri" FromRole="Kategori" ToRole="Yayınevi" />
+        </EntityType>
+        <Association Name="YayineviKategorileri">
+          <End Type="PressInfoModel.Kategori" Role="Kategori" Multiplicity="*" />
+          <End Type="PressInfoModel.Yayınevi" Role="Yayınevi" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PressInfoModelStoreContainer" CdmEntityContainer="PressInfoEntities">
+          <EntitySetMapping Name="Yayınevi">
+            <EntityTypeMapping TypeName="PressInfoModel.Yayınevi">
+              <MappingFragment StoreEntitySet="Yayınevi">
+                <ScalarProperty Name="bitti" ColumnName="bitti" />
+                <ScalarProperty Name="YayineviBirligiNo" ColumnName="YayineviBirligiNo" />
+                <ScalarProperty Name="Faks" ColumnName="Faks" />
+                <ScalarProperty Name="Sehir" ColumnName="Sehir" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="ResmiAd" ColumnName="ResmiAd" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Yetkili" ColumnName="Yetkili" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Web" ColumnName="Web" />
+                <ScalarProperty Name="Bilgi" ColumnName="Bilgi" />
+                <ScalarProperty Name="Alan" ColumnName="Alan" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InsertPress" FunctionName="PressInfoModel.Store.InsertPress" />
+          <FunctionImportMapping FunctionImportName="UpdatePress" FunctionName="PressInfoModel.Store.UpdatePress" />
+          <EntitySetMapping Name="Kategoris">
+            <EntityTypeMapping TypeName="PressInfoModel.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="YayineviKategorileri" TypeName="PressInfoModel.YayineviKategorileri" StoreEntitySet="YayineviKategorileri">
+            <EndProperty Name="Yayınevi">
+              <ScalarProperty Name="No" ColumnName="YayineviNo" />
+            </EndProperty>
+            <EndProperty Name="Kategori">
+              <ScalarProperty Name="No" ColumnName="KategoriNo" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
