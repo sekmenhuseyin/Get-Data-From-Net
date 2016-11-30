@@ -59,6 +59,7 @@ Partial Public Class Okul
     Public Property BilimEtkinlik As String
     Public Property Projeler As String
     Public Property YurtdisiProje As String
+    Public Property Bitti As Boolean
 
     Public Overridable Property Ilce As Ilce
 

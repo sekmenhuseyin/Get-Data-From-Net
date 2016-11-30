@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c82c34a819d2423184920391904bad03" Name="Diagram1">
+        <EntityTypeShape EntityType="DiyanetModel.Sehir" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="DiyanetModel.Ulke" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DiyanetModel.Vakit" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="DiyanetModel.FK_Vakit_Sehir" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

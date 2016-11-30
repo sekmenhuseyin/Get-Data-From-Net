@@ -22,6 +22,7 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.Browser = New System.Windows.Forms.WebBrowser()
         Me.lblUrl1 = New System.Windows.Forms.Label()
         Me.txtLists = New System.Windows.Forms.TextBox()
@@ -83,8 +84,8 @@ Partial Class frmMain
         Me.Controls.Add(Me.Browser)
         Me.Controls.Add(Me.txtLists)
         Me.Controls.Add(Me.lblUrl1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmMain"
-        Me.ShowIcon = False
         Me.Text = "MEB Codes"
         Me.ResumeLayout(False)
         Me.PerformLayout()

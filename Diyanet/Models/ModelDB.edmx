@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DiyanetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Sehir">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="int" Nullable="false" />
+          <Property Name="UlkeNo" Type="int" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ulke">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="int" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vakit">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SehirNo" Type="int" Nullable="false" />
+          <Property Name="Tarih" Type="date" Nullable="false" />
+          <Property Name="Hicri" Type="nvarchar(max)" />
+          <Property Name="Imsak" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Gunes" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Ikindi" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Aksam" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Yatsi" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Kible" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Vakit_Sehir">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+          <End Role="Vakit" Type="Self.Vakit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="Vakit">
+              <PropertyRef Name="SehirNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="InsertCountry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="No" Type="int" Mode="In" />
+          <Parameter Name="Ad" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="InsertState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UlkeNo" Type="int" Mode="In" />
+          <Parameter Name="No" Type="int" Mode="In" />
+          <Parameter Name="Ad" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="DiyanetModelStoreContainer">
+          <EntitySet Name="Sehir" EntityType="Self.Sehir" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ulke" EntityType="Self.Ulke" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vakit" EntityType="Self.Vakit" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Vakit_Sehir" Association="Self.FK_Vakit_Sehir">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="Vakit" EntitySet="Vakit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DiyanetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DiyanetEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="InsertCountry">
+            <Parameter Name="No" Mode="In" Type="Int32" />
+            <Parameter Name="Ad" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertState">
+            <Parameter Name="UlkeNo" Mode="In" Type="Int32" />
+            <Parameter Name="No" Mode="In" Type="Int32" />
+            <Parameter Name="Ad" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Sehirs" EntityType="DiyanetModel.Sehir" />
+          <EntitySet Name="Ulkes" EntityType="DiyanetModel.Ulke" />
+          <EntitySet Name="Vakits" EntityType="DiyanetModel.Vakit" />
+          <AssociationSet Name="FK_Vakit_Sehir" Association="DiyanetModel.FK_Vakit_Sehir">
+            <End Role="Sehir" EntitySet="Sehirs" />
+            <End Role="Vakit" EntitySet="Vakits" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Sehir">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" />
+          <Property Name="UlkeNo" Type="Int32" Nullable="false" />
+          <Property Name="Ad" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vakits" Relationship="DiyanetModel.FK_Vakit_Sehir" FromRole="Sehir" ToRole="Vakit" />
+        </EntityType>
+        <EntityType Name="Ulke">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" />
+          <Property Name="Ad" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Vakit">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SehirNo" Type="Int32" Nullable="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hicri" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Imsak" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Gunes" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Ikindi" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Aksam" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Yatsi" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Kible" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sehir" Relationship="DiyanetModel.FK_Vakit_Sehir" FromRole="Vakit" ToRole="Sehir" />
+        </EntityType>
+        <Association Name="FK_Vakit_Sehir">
+          <End Type="DiyanetModel.Sehir" Role="Sehir" Multiplicity="1" />
+          <End Type="DiyanetModel.Vakit" Role="Vakit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="Vakit">
+              <PropertyRef Name="SehirNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DiyanetModelStoreContainer" CdmEntityContainer="DiyanetEntities">
+          <FunctionImportMapping FunctionImportName="InsertCountry" FunctionName="DiyanetModel.Store.InsertCountry" />
+          <FunctionImportMapping FunctionImportName="InsertState" FunctionName="DiyanetModel.Store.InsertState" />
+          <EntitySetMapping Name="Sehirs">
+            <EntityTypeMapping TypeName="DiyanetModel.Sehir">
+              <MappingFragment StoreEntitySet="Sehir">
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="UlkeNo" ColumnName="UlkeNo" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ulkes">
+            <EntityTypeMapping TypeName="DiyanetModel.Ulke">
+              <MappingFragment StoreEntitySet="Ulke">
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vakits">
+            <EntityTypeMapping TypeName="DiyanetModel.Vakit">
+              <MappingFragment StoreEntitySet="Vakit">
+                <ScalarProperty Name="Kible" ColumnName="Kible" />
+                <ScalarProperty Name="Yatsi" ColumnName="Yatsi" />
+                <ScalarProperty Name="Aksam" ColumnName="Aksam" />
+                <ScalarProperty Name="Ikindi" ColumnName="Ikindi" />
+                <ScalarProperty Name="Gunes" ColumnName="Gunes" />
+                <ScalarProperty Name="Imsak" ColumnName="Imsak" />
+                <ScalarProperty Name="Hicri" ColumnName="Hicri" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="SehirNo" ColumnName="SehirNo" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

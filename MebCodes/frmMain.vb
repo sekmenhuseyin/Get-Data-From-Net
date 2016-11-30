@@ -38,7 +38,7 @@ Public Class frmMain
     End Sub
     'okul ayrıntılarını kaydet
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim tbl = db.Okuls.OrderBy(Function(m) m.No).ToList()
+        Dim tbl = db.Okuls.Where(Function(m) m.Bitti = False).OrderBy(Function(m) m.No).ToList()
         For Each item In tbl
             ad = item.Url : no = item.No
             ReloadFrame(item.HakkindaUrl)
@@ -51,18 +51,13 @@ Public Class frmMain
     End Sub
     'web browser
     Private Sub Browser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles Browser.DocumentCompleted
-        'generatecities()
-        'generatetowns()
-        'generateschools()
         UpdateSchools()
     End Sub
     'illeri bulur
     Private Sub GenerateCities()
         'iller
-        Dim allelements As HtmlElementCollection = Browser.Document.All
-        For Each webpageelement As HtmlElement In allelements
-            If webpageelement.Id = "jumpMenu5" Then txtLists.Text = webpageelement.InnerHtml
-        Next
+        Dim webelement As HtmlElement = Browser.Document.GetElementById("jumpMenu5")
+        txtLists.Text = webelement.InnerHtml
         txtLists.Text = txtLists.Text.Replace("<option value="""">İL</option>", "")
         txtLists.Text = txtLists.Text.Replace(" selected=""selected""", "")
         txtLists.Text = txtLists.Text.Replace("</option>", vbCrLf)
@@ -72,10 +67,8 @@ Public Class frmMain
     'ilçeleri bulur
     Private Sub GenerateTowns()
         'ilçeler
-        Dim allelements As HtmlElementCollection = Browser.Document.All
-        For Each webpageelement As HtmlElement In allelements
-            If webpageelement.Id = "jumpMenu6" Then txtLists.Text = webpageelement.InnerHtml
-        Next
+        Dim webelement As HtmlElement = Browser.Document.GetElementById("jumpMenu6")
+        txtLists.Text = webelement.InnerHtml
         txtLists.Text = txtLists.Text.Replace("<option value=""?ILKODU=" & il & "&amp;ILCEKODU=0"">Tüm ilçeler</option>", "")
         txtLists.Text = txtLists.Text.Replace(" selected=""selected""", "")
         txtLists.Text = txtLists.Text.Replace("</option>", vbCrLf)
@@ -117,6 +110,7 @@ Public Class frmMain
     End Sub
     'okulları günceller
     Private Sub UpdateSchools()
+        Dim onay = False
         'okul ayrıntıları
         Dim webelement As HtmlElement = Browser.Document.GetElementById("hakkinda_kutu")
         'div ise
@@ -134,30 +128,31 @@ Public Class frmMain
             txtLists.Text = txtLists.Text.Replace("Eposta", "").Replace("Yazdır", "").Replace(" class=""""", "").Replace("<input ", "").Replace("<span>", "").Replace("</span>", "")
             txtLists.Text = txtLists.Text.Replace("<i class=""fa""></i>", "").Replace("<input>", "").Replace("<div>", "").Replace("</div>", "").Replace(vbTab, "").Replace("&lt;", "")
         Else 'table ise
-            Dim allelements As HtmlElementCollection = Browser.Document.GetElementsByTagName("table")
-            For Each webpageelement As HtmlElement In allelements
-                If webpageelement.GetAttribute("classname") = "table" Then
-                    txtLists.Text = webpageelement.InnerHtml
-                    txtLists.Text = txtLists.Text.Replace(" colspan=""3""", "").Replace(" width=""15""", "").Replace(" width=""100""", "").Replace(" width=""100""", "").Replace(" width=""100%""", "").Replace("noprint", "").Replace("bordernone", "")
-                    txtLists.Text = txtLists.Text.Replace(" disabled=""disabled""", "").Replace(" class=""""", "").Replace(" type=""checkbox""", "").Replace(" value=""""", "").Replace("=""""", "")
-                    txtLists.Text = txtLists.Text.Replace(" fa-phone", "").Replace(" fa-envelope", "").Replace(" fa-globe", "").Replace(" fa-map-marker", "").Replace(" fa-flag-o", "").Replace(" fa-flag", "")
-                    txtLists.Text = txtLists.Text.Replace(" fa-graduation-cap", "").Replace(" fa-user", "").Replace(" fa-child", "").Replace(" fa-picture-o", "").Replace(" fa-music", "").Replace(" fa-building-o", "")
-                    txtLists.Text = txtLists.Text.Replace(" fa-fax", "").Replace(" fa-building", "").Replace(" fa-laptop", "").Replace(" fa-bed", "").Replace(" fa-university", "").Replace(" fa-flask", "").Replace(" fa-microphone", "").Replace(" fa-wrench", "").Replace(" fa-futbol-o", "")
-                    txtLists.Text = txtLists.Text.Replace(" fa-code-fork", "").Replace(" fa-cutlery", "").Replace(" fa-heartbeat", "").Replace(" fa-tree", "").Replace(" fa-clock-o", "").Replace(" fa-wifi", "").Replace(" fa-language", "")
-                    txtLists.Text = txtLists.Text.Replace(" fa-print", "").Replace(" fa-fire", "").Replace(" fa-home", "").Replace(" fa-subway", "").Replace(" fa-thumb-tack", "").Replace(" fa-street-view", "").Replace(" fa-line-chart", "").Replace(" fa-info", "")
-                    txtLists.Text = txtLists.Text.Replace(" name=""chk_misafirhane""", "").Replace(" name=""chk_konferanssalonu""", "").Replace(" name=""chk_sporsalonu""", "").Replace(" name=""chk_kantin""", "").Replace(" name=""chk_bahce""", "").Replace(" name=""chk_revir""", "").Replace(" name=""chk_yemekhane""", "")
-                    txtLists.Text = txtLists.Text.Replace("<i class=""fa""></i>", "").Replace("<input>", "").Replace("<input ", "").Replace(vbTab, "")
-                    txtLists.Text = txtLists.Text.Replace("<table>", "").Replace("</table>", "").Replace("<tbody>", "").Replace("</tbody>", "")
-                    txtLists.Text = txtLists.Text.Replace("</tr>", "").Replace("<tr>", "").Replace("<td>", "").Replace("</td>", "")
-                    txtLists.Text = txtLists.Text.Replace("<a href=""" & ad & "/tema/eposta/eposta_gonder.php?CHK=&amp;iframe=true&amp;width=600&amp;height=550"" rel=""prettyPhoto"">Göndermek için tıklayınız</a>", "")
-                    txtLists.Text = txtLists.Text.Replace("<a style=""opacity: 1;"" onclick=""window.print();return false"" href=""#print""><img src=""http://www.meb.gov.tr/www/images/ico/printButton.png""></a>", "")
-                    txtLists.Text = txtLists.Text.Replace("Eposta", "").Replace("Yazdır :", "").Replace(">", "").Replace("&lt;", "")
-                    Exit For
-                End If
-            Next
-            If txtLists.Text = "" Then
+            Dim okulkodu As HtmlElement = Browser.Document.GetElementById("okulkodu")
+            If IsNothing(okulkodu) = True Then 'id'li tablolar
+                Dim allelements As HtmlElementCollection = Browser.Document.GetElementsByTagName("table")
+                For Each webpageelement As HtmlElement In allelements
+                    If webpageelement.GetAttribute("classname") = "table" Then
+                        txtLists.Text = webpageelement.InnerHtml
+                        txtLists.Text = txtLists.Text.Replace(" colspan=""3""", "").Replace(" width=""15""", "").Replace(" width=""100""", "").Replace(" width=""100""", "").Replace(" width=""100%""", "").Replace("noprint", "").Replace("bordernone", "")
+                        txtLists.Text = txtLists.Text.Replace(" disabled=""disabled""", "").Replace(" class=""""", "").Replace(" type=""checkbox""", "").Replace(" value=""""", "").Replace("=""""", "")
+                        txtLists.Text = txtLists.Text.Replace(" fa-phone", "").Replace(" fa-envelope", "").Replace(" fa-globe", "").Replace(" fa-map-marker", "").Replace(" fa-flag-o", "").Replace(" fa-flag", "")
+                        txtLists.Text = txtLists.Text.Replace(" fa-graduation-cap", "").Replace(" fa-user", "").Replace(" fa-child", "").Replace(" fa-picture-o", "").Replace(" fa-music", "").Replace(" fa-building-o", "")
+                        txtLists.Text = txtLists.Text.Replace(" fa-fax", "").Replace(" fa-building", "").Replace(" fa-laptop", "").Replace(" fa-bed", "").Replace(" fa-university", "").Replace(" fa-flask", "").Replace(" fa-microphone", "").Replace(" fa-wrench", "").Replace(" fa-futbol-o", "")
+                        txtLists.Text = txtLists.Text.Replace(" fa-code-fork", "").Replace(" fa-cutlery", "").Replace(" fa-heartbeat", "").Replace(" fa-tree", "").Replace(" fa-clock-o", "").Replace(" fa-wifi", "").Replace(" fa-language", "")
+                        txtLists.Text = txtLists.Text.Replace(" fa-print", "").Replace(" fa-fire", "").Replace(" fa-home", "").Replace(" fa-subway", "").Replace(" fa-thumb-tack", "").Replace(" fa-street-view", "").Replace(" fa-line-chart", "").Replace(" fa-info", "")
+                        txtLists.Text = txtLists.Text.Replace(" name=""chk_misafirhane""", "").Replace(" name=""chk_konferanssalonu""", "").Replace(" name=""chk_sporsalonu""", "").Replace(" name=""chk_kantin""", "").Replace(" name=""chk_bahce""", "").Replace(" name=""chk_revir""", "").Replace(" name=""chk_yemekhane""", "")
+                        txtLists.Text = txtLists.Text.Replace("<i class=""fa""></i>", "").Replace("<input>", "").Replace("<input ", "").Replace(vbTab, "")
+                        txtLists.Text = txtLists.Text.Replace("<table>", "").Replace("</table>", "").Replace("<tbody>", "").Replace("</tbody>", "")
+                        txtLists.Text = txtLists.Text.Replace("</tr>", "").Replace("<tr>", "").Replace("<td>", "").Replace("</td>", "")
+                        txtLists.Text = txtLists.Text.Replace("<a href=""" & ad & "/tema/eposta/eposta_gonder.php?CHK=&amp;iframe=true&amp;width=600&amp;height=550"" rel=""prettyPhoto"">Göndermek için tıklayınız</a>", "")
+                        txtLists.Text = txtLists.Text.Replace("<a style=""opacity: 1;"" onclick=""window.print();return false"" href=""#print""><img src=""http://www.meb.gov.tr/www/images/ico/printButton.png""></a>", "")
+                        txtLists.Text = txtLists.Text.Replace("Eposta", "").Replace("Yazdır :", "").Replace(">", "").Replace("&lt;", "")
+                        Exit For
+                    End If
+                Next
+            Else
                 Dim allelements2 As HtmlElementCollection = Browser.Document.GetElementsByTagName("table")
-                Dim onay = False
                 For Each webpageelement As HtmlElement In allelements2
                     If onay = True Then
                         txtLists.Text = webpageelement.InnerHtml
@@ -185,7 +180,11 @@ Public Class frmMain
                     End If
                     onay = True
                 Next
+
             End If
+        End If
+        If txtLists.Text = "" Then
+            txtLists.Text = ""
         End If
         'clean empty lines
         txtLists.Text = txtLists.Text.Trim()
@@ -193,6 +192,13 @@ Public Class frmMain
         For Each item In items
             If item.Trim() <> "" Then line &= item.Trim() & vbLf
         Next
+        txtLists.Text = line
+        If onay = True Then
+            items = txtLists.Text.Split(vbLf) : line = ""
+            For i = 1 To items.Length
+                line &= items(i) & vbLf
+            Next
+        End If
         txtLists.Text = line
         'kaydet ve geç
         If txtLists.Text <> "" Then
@@ -218,8 +224,6 @@ Public Class frmMain
                     Dim s = db.UpdateSchool(no, alanlar(ix), totalStr)
                 End If
             Next
-        Else
-            txtLists.Text = ""
         End If
         txtLists.Text = ""
     End Sub

@@ -73,6 +73,7 @@
           <Property Name="BilimEtkinlik" Type="nvarchar(max)" />
           <Property Name="Projeler" Type="nvarchar(max)" />
           <Property Name="YurtdisiProje" Type="nvarchar(max)" />
+          <Property Name="Bitti" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Ilce_Il">
           <End Role="Il" Type="Self.Il" Multiplicity="1" />
@@ -254,6 +255,7 @@
           <Property Name="Projeler" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="YurtdisiProje" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Ilce" Relationship="MEBModel.FK_Okul_Ilce" FromRole="Okul" ToRole="Ilce" />
+          <Property Name="Bitti" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Okul_Ilce">
           <End Type="MEBModel.Ilce" Role="Ilce" Multiplicity="1" />
@@ -298,6 +300,7 @@
           <EntitySetMapping Name="Okuls">
             <EntityTypeMapping TypeName="MEBModel.Okul">
               <MappingFragment StoreEntitySet="Okul">
+                <ScalarProperty Name="Bitti" ColumnName="Bitti" />
                 <ScalarProperty Name="YurtdisiProje" ColumnName="YurtdisiProje" />
                 <ScalarProperty Name="Projeler" ColumnName="Projeler" />
                 <ScalarProperty Name="BilimEtkinlik" ColumnName="BilimEtkinlik" />
