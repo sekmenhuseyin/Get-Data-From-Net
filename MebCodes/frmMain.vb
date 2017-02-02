@@ -195,7 +195,7 @@ Public Class frmMain
         txtLists.Text = line
         If onay = True Then
             items = txtLists.Text.Split(vbLf) : line = ""
-            For i = 1 To items.Length
+            For i = 1 To items.Length - 1
                 line &= items(i) & vbLf
             Next
         End If

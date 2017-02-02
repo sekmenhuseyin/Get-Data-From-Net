@@ -9,6 +9,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PressInfo", "PressInfo\Pres
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Diyanet", "Diyanet\Diyanet.vbproj", "{79DDAA88-6BD3-4CE5-942B-39CB3763A6A2}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KıbleBulucu", "KıbleBulucu\KıbleBulucu.vbproj", "{1BFDA4E9-235E-467B-98F6-9B74B78A5E01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{79DDAA88-6BD3-4CE5-942B-39CB3763A6A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79DDAA88-6BD3-4CE5-942B-39CB3763A6A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79DDAA88-6BD3-4CE5-942B-39CB3763A6A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BFDA4E9-235E-467B-98F6-9B74B78A5E01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BFDA4E9-235E-467B-98F6-9B74B78A5E01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BFDA4E9-235E-467B-98F6-9B74B78A5E01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BFDA4E9-235E-467B-98F6-9B74B78A5E01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
